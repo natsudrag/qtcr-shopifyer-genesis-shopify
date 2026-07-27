@@ -11,7 +11,7 @@ Returns service status.
 ```json
 {
   "status": "ok",
-  "service": "qtcr-concierge-api"
+  "service": "stream-buy-gen-concierge-api"
 }
 ```
 
@@ -52,7 +52,7 @@ Returns public mock content for the customer-facing carousel.
 All `/api/ops/*` endpoints require this mock header in local development:
 
 ```http
-x-qtcr-team-token: QTCR-DEMO
+x-stream-buy-gen-team-token: SBG-DEMO
 ```
 
 This is not production authentication.
@@ -86,7 +86,7 @@ Response body:
 ```json
 {
   "request": {
-    "id": "QTCR-20260726-0001",
+    "id": "SBG-20260726-0001",
     "status": "new",
     "brief": {
       "product": {},
@@ -153,7 +153,7 @@ Validates and echoes updated mock manager content. This does not persist to dura
     {
       "id": "clear-total",
       "customerName": "Sofia M.",
-      "quote": "Qtcr showed the product price, import reserve, handling, and delivery before checkout.",
+      "quote": "Stream Buy Gen showed the product price, import reserve, handling, and delivery before checkout.",
       "approvedForCarousel": true
     }
   ]

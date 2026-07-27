@@ -1,4 +1,4 @@
-# Qtcr Shopifyer Genesis Shopify
+# Stream Buy Gen
 
 Initial foundation for a premium AI-ready personal-shopping concierge for shoppers buying from the U.S. into Costa Rica.
 
@@ -64,7 +64,7 @@ Excluded by design:
 The frontend workspace includes a demo access screen. The backend operations endpoints require the mock header:
 
 ```bash
-x-qtcr-team-token: QTCR-DEMO
+x-stream-buy-gen-team-token: SBG-DEMO
 ```
 
 This is a local prototype guard only, not production auth.

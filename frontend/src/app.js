@@ -56,7 +56,7 @@ const marketingContent = {
     {
       id: "clear-total",
       customerName: "Sofia M.",
-      quote: "Qtcr showed the product price, import reserve, handling, and delivery before checkout.",
+      quote: "Stream Buy Gen showed the product price, import reserve, handling, and delivery before checkout.",
       approvedForCarousel: true
     },
     {
@@ -70,7 +70,7 @@ const marketingContent = {
 
 const requests = [
   {
-    id: "QTCR-20260726-0004",
+    id: "SBG-20260726-0004",
     customer: "Mariana R.",
     channel: "URL",
     status: "new",
@@ -98,7 +98,7 @@ const requests = [
     timeline: ["Request received from product URL", "AI brief prepared with low confidence on color availability"]
   },
   {
-    id: "QTCR-20260726-0003",
+    id: "SBG-20260726-0003",
     customer: "Diego P.",
     channel: "Screenshot",
     status: "needs_details",
@@ -126,7 +126,7 @@ const requests = [
     timeline: ["Screenshot request received", "Missing size and substitute preference requested"]
   },
   {
-    id: "QTCR-20260726-0002",
+    id: "SBG-20260726-0002",
     customer: "Sofia M.",
     channel: "Request",
     status: "quoted",
@@ -154,7 +154,7 @@ const requests = [
     timeline: ["Natural-language request normalized", "Quote assembled and waiting for customer approval"]
   },
   {
-    id: "QTCR-20260725-0009",
+    id: "SBG-20260725-0009",
     customer: "Andres V.",
     channel: "URL",
     status: "in_transit",

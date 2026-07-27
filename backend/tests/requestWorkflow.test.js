@@ -69,7 +69,7 @@ test("updateMarketingContent validates manager carousel content", () => {
 
   assert.equal(content.campaignWindow.headline, "Weekly verified finds");
   assert.equal(content.carouselSlides[0].accent, "emerald");
-  assert.equal(content.testimonials[0].customerName, "Qtcr customer");
+  assert.equal(content.testimonials[0].customerName, "Stream Buy Gen customer");
   assert.equal(content.persistence, "mock_only");
 });
 
@@ -92,7 +92,7 @@ test("createRequest stores a new structured operations request", () => {
     store
   );
 
-  assert.match(request.id, /^QTCR-\d{8}-0001$/);
+  assert.match(request.id, /^SBG-\d{8}-0001$/);
   assert.equal(request.status, "new");
   assert.equal(request.brief.verification.required, true);
   assert.equal(request.brief.landedCost.confidence, "low_until_human_verified");
@@ -112,7 +112,7 @@ test("seedOperationsStore creates realistic dashboard records", () => {
 test("requestMissingDetails records a customer follow-up and moves status", () => {
   const store = seedOperationsStore(new Map());
   const request = requestMissingDetails(
-    "QTCR-20260726-0004",
+    "SBG-20260726-0004",
     { prompt: "Please confirm exact suitcase color fallback." },
     store
   );
@@ -125,7 +125,7 @@ test("requestMissingDetails records a customer follow-up and moves status", () =
 test("assembleQuote stores transparent quote lines and marks request quoted", () => {
   const store = seedOperationsStore(new Map());
   const request = assembleQuote(
-    "QTCR-20260726-0004",
+    "SBG-20260726-0004",
     {
       lines: [
         { id: "retailer_item", label: "Retailer item", amount: 100 },
@@ -143,11 +143,11 @@ test("assembleQuote stores transparent quote lines and marks request quoted", ()
 
 test("advanceRequest enforces lifecycle progression", () => {
   const store = seedOperationsStore(new Map());
-  const request = advanceRequest("QTCR-20260726-0002", { status: "approved" }, store);
+  const request = advanceRequest("SBG-20260726-0002", { status: "approved" }, store);
 
   assert.equal(request.status, "approved");
   assert.throws(
-    () => advanceRequest("QTCR-20260726-0002", { status: "delivered" }, store),
+    () => advanceRequest("SBG-20260726-0002", { status: "delivered" }, store),
     /Cannot move from approved to delivered/
   );
 });

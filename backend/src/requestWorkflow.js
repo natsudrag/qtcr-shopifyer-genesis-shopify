@@ -94,15 +94,15 @@ const defaultMarketingContent = {
     {
       id: "clear-total",
       customerName: "Sofia M.",
-      quote: "Qtcr showed the product price, import reserve, handling, and delivery before checkout.",
-      requestId: "QTCR-20260726-0002",
+      quote: "Stream Buy Gen showed the product price, import reserve, handling, and delivery before checkout.",
+      requestId: "SBG-20260726-0002",
       approvedForCarousel: true
     },
     {
       id: "found-size",
       customerName: "Diego P.",
       quote: "The team asked the right sizing question before buying, which saved a return problem.",
-      requestId: "QTCR-20260726-0003",
+      requestId: "SBG-20260726-0003",
       approvedForCarousel: false
     }
   ]
@@ -131,7 +131,7 @@ function getOpsConfig() {
     quoteLineDefaults: defaultQuoteLines,
     auth: {
       mode: "mock_header",
-      header: "x-qtcr-team-token"
+      header: "x-stream-buy-gen-team-token"
     }
   };
 }
@@ -172,7 +172,7 @@ function seedOperationsStore(store) {
 
   const seeded = [
     createSeedRequest({
-      id: "QTCR-20260726-0004",
+      id: "SBG-20260726-0004",
       status: "new",
       customer: { name: "Mariana R.", email: "mariana@example.com" },
       requestType: "url",
@@ -211,7 +211,7 @@ function seedOperationsStore(store) {
       timeline: ["Request received from product URL", "AI brief prepared with low confidence on color availability"]
     }),
     createSeedRequest({
-      id: "QTCR-20260726-0003",
+      id: "SBG-20260726-0003",
       status: "needs_details",
       customer: { name: "Diego P.", email: "diego@example.com" },
       requestType: "screenshot",
@@ -244,7 +244,7 @@ function seedOperationsStore(store) {
       timeline: ["Screenshot request received", "Missing size and substitute preference requested"]
     }),
     createSeedRequest({
-      id: "QTCR-20260726-0002",
+      id: "SBG-20260726-0002",
       status: "quoted",
       customer: { name: "Sofia M.", email: "sofia@example.com" },
       requestType: "natural_language",
@@ -573,7 +573,7 @@ function createRequestId(date, sequence) {
   const yyyy = date.getUTCFullYear();
   const mm = String(date.getUTCMonth() + 1).padStart(2, "0");
   const dd = String(date.getUTCDate()).padStart(2, "0");
-  return `QTCR-${yyyy}${mm}${dd}-${String(sequence).padStart(4, "0")}`;
+  return `SBG-${yyyy}${mm}${dd}-${String(sequence).padStart(4, "0")}`;
 }
 
 function createWorkflowError(code, message, status = 400) {
@@ -635,9 +635,9 @@ function normalizeTestimonial(testimonial = {}) {
 
   return {
     id: String(testimonial.id),
-    customerName: stringOrFallback(testimonial.customerName, "Qtcr customer"),
+    customerName: stringOrFallback(testimonial.customerName, "Stream Buy Gen customer"),
     quote: String(testimonial.quote),
-    requestId: stringOrFallback(testimonial.requestId, "QTCR-MOCK"),
+    requestId: stringOrFallback(testimonial.requestId, "SBG-MOCK"),
     approvedForCarousel: Boolean(testimonial.approvedForCarousel)
   };
 }

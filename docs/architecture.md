@@ -2,7 +2,7 @@
 
 ## Product Boundary
 
-Qtcr Shopifyer Genesis Shopify is the concierge layer for U.S.-to-Costa-Rica shopping requests. It should help a shopper submit a product URL, screenshot, or plain-language request, then turn that input into a verified shopping brief and quote workflow.
+Stream Buy Gen is the concierge layer for U.S.-to-Costa-Rica shopping requests. It should help a shopper submit a product URL, screenshot, or plain-language request, then turn that input into a verified shopping brief and quote workflow.
 
 Shopify remains the future system of record for customer account, cart, checkout, payments, and transactional order records. This application should avoid duplicating Shopify-owned capabilities.
 
@@ -44,7 +44,7 @@ The backend is a Node HTTP skeleton with in-memory mocked data. It exposes:
 
 The workflow module is intentionally isolated from HTTP handling so provider integrations can be swapped in behind stable contracts.
 
-Operations endpoints use a mock `x-qtcr-team-token` header. This documents a protected boundary without introducing production authentication before the identity provider is selected.
+Operations endpoints use a mock `x-stream-buy-gen-team-token` header. This documents a protected boundary without introducing production authentication before the identity provider is selected.
 
 Carousel and testimonial records are mock-only. They are shaped as future CMS or admin records but do not persist beyond the in-memory/local prototype.
 
