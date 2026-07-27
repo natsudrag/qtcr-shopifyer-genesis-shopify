@@ -3,196 +3,155 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Qtcr Shopifyer Genesis Shopify</title>
+    <title>Qtcr Ops Workspace</title>
     <meta
       name="description"
-      content="Premium AI-ready personal-shopping concierge for U.S.-to-Costa-Rica requests, quotes, and tracking."
+      content="Mock protected team workspace for managing Qtcr concierge requests, briefs, transparent quotes, and fulfillment stages."
     />
     <link rel="stylesheet" href="./styles/main.css" />
   </head>
   <body>
-    <header class="site-header" aria-label="Primary">
-      <a class="brand-mark" href="#top" aria-label="Qtcr Shopifyer Genesis Shopify home">
-        <span class="brand-badge">QTCR</span>
-        <span>
-          <strong>Shopifyer Genesis</strong>
-          <small>U.S. to Costa Rica concierge</small>
-        </span>
-      </a>
-      <nav class="nav-links" aria-label="Product sections">
-        <a href="#brief">Brief</a>
-        <a href="#workflow">Workflow</a>
-        <a href="#trust">Trust</a>
-      </nav>
-    </header>
-
-    <main id="top">
-      <section class="hero-shell" aria-labelledby="hero-title">
-        <div class="editorial-band" aria-hidden="true">
-          <span class="stripe stripe-one"></span>
-          <span class="stripe stripe-two"></span>
-          <span class="star star-one"></span>
-          <span class="star star-two"></span>
-        </div>
-
-        <div class="hero-copy">
-          <p class="eyebrow">Personal shopping, verified before checkout</p>
-          <h1 id="hero-title">Send the product. Get the Costa Rica-ready brief.</h1>
-          <p class="hero-lede">
-            Submit a U.S. product link, screenshot, or plain request. Qtcr turns it into a structured concierge brief with landed-cost guidance, follow-up questions, and human review before a Shopify checkout handoff.
+    <main class="ops-shell" id="workspace">
+      <section class="access-screen" id="access-screen" aria-labelledby="access-title">
+        <div class="brand-card">
+          <span class="brand-badge">QTCR</span>
+          <p class="eyebrow">Mock protected workspace</p>
+          <h1 id="access-title">Shopper operations, before Shopify checkout.</h1>
+          <p>
+            A calm internal console for reviewing concierge requests, verifying AI shopping briefs,
+            building transparent quotes, and tracking the U.S.-to-Costa-Rica journey.
           </p>
-          <div class="hero-actions" aria-label="Primary actions">
-            <a class="button primary" href="#request">Start a request</a>
-            <a class="button secondary" href="#brief">View sample brief</a>
-          </div>
         </div>
 
-        <aside class="concierge-panel" id="request" aria-labelledby="request-title">
-          <div class="panel-heading">
-            <p class="eyebrow">Concierge intake</p>
-            <h2 id="request-title">What should we source?</h2>
-          </div>
-
-          <div class="mode-tabs" role="tablist" aria-label="Request type">
-            <button class="mode-tab active" type="button" data-mode="url" aria-selected="true">URL</button>
-            <button class="mode-tab" type="button" data-mode="screenshot" aria-selected="false">Screenshot</button>
-            <button class="mode-tab" type="button" data-mode="natural" aria-selected="false">Request</button>
-          </div>
-
-          <form class="request-form" id="request-form">
-            <label for="request-input" id="request-label">Product URL</label>
-            <textarea
-              id="request-input"
-              name="request"
-              rows="4"
-              placeholder="Paste a product link from Amazon, Nike, Sephora, Best Buy, or another U.S. store."
-              required
-            ></textarea>
-
-            <div class="form-row">
-              <label>
-                Budget target
-                <input name="budget" type="text" value="$120 to $180" />
-              </label>
-              <label>
-                Delivery area
-                <select name="delivery">
-                  <option>San Jose pickup</option>
-                  <option>GAM courier</option>
-                  <option>Outside GAM quote</option>
-                </select>
-              </label>
-            </div>
-
-            <button class="button primary wide" type="submit">Generate brief preview</button>
-          </form>
-        </aside>
+        <form class="access-panel" id="access-form">
+          <h2>Team access</h2>
+          <p>Use the demo passcode to enter this local prototype.</p>
+          <label>
+            Passcode
+            <input autocomplete="off" id="passcode" name="passcode" type="password" value="QTCR-DEMO" />
+          </label>
+          <button class="button primary" type="submit">Enter workspace</button>
+          <p class="fine-print">Mock protection only. Production auth should be owned by the chosen identity provider.</p>
+        </form>
       </section>
 
-      <section class="brief-section" id="brief" aria-labelledby="brief-title">
-        <div class="section-kicker">AI-ready, human-verified</div>
-        <div class="brief-layout">
+      <section class="dashboard hidden" id="dashboard" aria-labelledby="dashboard-title">
+        <header class="ops-header">
+          <a class="brand-mark" href="#workspace" aria-label="Qtcr operations home">
+            <span class="brand-badge">QTCR</span>
+            <span>
+              <strong>Shopifyer Genesis Ops</strong>
+              <small>Concierge team workspace</small>
+            </span>
+          </a>
+          <div class="header-actions">
+            <span class="team-pill">Mock team session</span>
+            <button class="icon-button" id="lock-button" type="button" aria-label="Lock workspace" title="Lock workspace">
+              Lock
+            </button>
+          </div>
+        </header>
+
+        <section class="ops-hero" aria-labelledby="dashboard-title">
           <div>
-            <h2 id="brief-title">A shopping brief, not a chat transcript.</h2>
+            <p class="eyebrow">Internal shopper operations</p>
+            <h1 id="dashboard-title">Requests that need clear decisions.</h1>
             <p>
-              The first product experience organizes customer intent into fields a concierge team can verify: source, variants, landed-cost assumptions, import risk, return complexity, and missing decisions.
+              Operators can inspect AI-prepared briefs, ask for missing details, assemble transparent quotes,
+              and move requests through every concierge fulfillment stage.
             </p>
           </div>
+          <div class="daily-card" aria-label="Today summary">
+            <span class="ribbon">Costa Rica-ready</span>
+            <dl class="metric-grid">
+              <div>
+                <dt>Open</dt>
+                <dd id="metric-open">0</dd>
+              </div>
+              <div>
+                <dt>Quoted</dt>
+                <dd id="metric-quoted">0</dd>
+              </div>
+              <div>
+                <dt>Transit</dt>
+                <dd id="metric-transit">0</dd>
+              </div>
+            </dl>
+          </div>
+        </section>
 
-          <article class="brief-board" aria-label="Generated shopping brief preview">
-            <header class="brief-header">
-              <span class="status-pill">Brief ready</span>
-              <span>Human verification required</span>
+        <section class="status-lane" aria-label="Request lifecycle">
+          <ol id="status-track"></ol>
+        </section>
+
+        <section class="workspace-grid">
+          <aside class="queue-panel" aria-labelledby="queue-title">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Request queue</p>
+                <h2 id="queue-title">Active work</h2>
+              </div>
+              <select id="status-filter" aria-label="Filter requests by status">
+                <option value="all">All statuses</option>
+              </select>
+            </div>
+            <div class="request-list" id="request-list"></div>
+          </aside>
+
+          <section class="detail-panel" aria-labelledby="detail-title">
+            <header class="detail-header">
+              <div>
+                <p class="eyebrow">Selected request</p>
+                <h2 id="detail-title"></h2>
+                <p id="detail-meta"></p>
+              </div>
+              <span class="status-pill" id="detail-status"></span>
             </header>
 
-            <div class="brief-grid">
-              <section class="brief-block product-summary" aria-labelledby="product-summary-title">
-                <h3 id="product-summary-title">Extracted Product</h3>
-                <dl>
-                  <div>
-                    <dt>Item</dt>
-                    <dd id="brief-item">Retro red carry-on suitcase</dd>
-                  </div>
-                  <div>
-                    <dt>Source</dt>
-                    <dd id="brief-source">Customer URL</dd>
-                  </div>
-                  <div>
-                    <dt>Variant</dt>
-                    <dd id="brief-variant">Cabin size, cherry red, hard shell</dd>
-                  </div>
-                </dl>
-              </section>
-
-              <section class="brief-block" aria-labelledby="questions-title">
-                <h3 id="questions-title">Questions</h3>
-                <ul id="brief-questions">
-                  <li>Is a close color match acceptable if cherry red sells out?</li>
-                  <li>Should we prioritize lowest landed cost or fastest arrival?</li>
-                </ul>
-              </section>
-
-              <section class="brief-block cost-block" aria-labelledby="cost-title">
-                <h3 id="cost-title">Preliminary Landed Cost</h3>
-                <p class="cost-range" id="brief-cost">$164 - $212</p>
-                <p class="fine-print">Preliminary estimate. Final quote requires source availability, duties, handling, and delivery confirmation.</p>
-              </section>
-
-              <section class="brief-block" aria-labelledby="risk-title">
-                <h3 id="risk-title">Risk and Returns</h3>
-                <ul id="brief-risks">
-                  <li>Bulky-item dimensional weight may change freight pricing.</li>
-                  <li>Return feasibility depends on retailer window and condition rules.</li>
-                </ul>
-              </section>
+            <div class="detail-grid">
+              <article class="brief-card">
+                <h3>AI Shopping Brief</h3>
+                <dl id="brief-fields"></dl>
+              </article>
+              <article class="brief-card">
+                <h3>Questions and Risk</h3>
+                <ul id="brief-questions"></ul>
+                <ul class="risk-list" id="brief-risks"></ul>
+              </article>
             </div>
-          </article>
-        </div>
-      </section>
 
-      <section class="workflow-section" id="workflow" aria-labelledby="workflow-title">
-        <div>
-          <p class="eyebrow">Operating model</p>
-          <h2 id="workflow-title">Designed for quotes before checkout.</h2>
-        </div>
-        <div class="workflow-steps">
-          <article>
-            <span>01</span>
-            <h3>Capture request</h3>
-            <p>URL, screenshot, or natural-language request becomes a normalized intake record.</p>
-          </article>
-          <article>
-            <span>02</span>
-            <h3>Prepare brief</h3>
-            <p>AI-assisted extraction drafts product details, questions, landed-cost range, and risk notes.</p>
-          </article>
-          <article>
-            <span>03</span>
-            <h3>Verify quote</h3>
-            <p>A human confirms availability, import assumptions, timing, and return limitations.</p>
-          </article>
-          <article>
-            <span>04</span>
-            <h3>Handoff later</h3>
-            <p>Accepted quotes can become Shopify checkout links when credentials and flow are ready.</p>
-          </article>
-        </div>
-      </section>
+            <section class="quote-workbench" aria-labelledby="quote-title">
+              <div class="workbench-header">
+                <div>
+                  <h3 id="quote-title">Transparent Quote</h3>
+                  <p>All amounts are mocked and preliminary until human verified.</p>
+                </div>
+                <button class="button secondary" id="apply-quote" type="button">Save quote draft</button>
+              </div>
+              <div class="quote-grid" id="quote-grid"></div>
+            </section>
 
-      <section class="trust-section" id="trust" aria-label="Trust signals">
-        <div class="ribbon">Costa Rica-ready concierge commerce</div>
-        <div class="trust-grid">
-          <p><strong>Transparent.</strong> Estimates stay labeled preliminary until reviewed.</p>
-          <p><strong>Practical.</strong> Risk guidance covers freight, duties, variants, returns, and delays.</p>
-          <p><strong>Extensible.</strong> API boundaries leave room for Shopify, AI, storage, and notification providers.</p>
-        </div>
+            <section class="operator-actions" aria-labelledby="actions-title">
+              <div>
+                <h3 id="actions-title">Missing Details</h3>
+                <textarea id="missing-detail-input" rows="3" placeholder="Ask the shopper for size, substitute preference, deadline, or delivery confirmation."></textarea>
+                <button class="button secondary" id="request-details" type="button">Request details</button>
+              </div>
+              <div>
+                <h3>Advance Status</h3>
+                <select id="status-select" aria-label="Choose next status"></select>
+                <button class="button primary" id="advance-status" type="button">Advance request</button>
+              </div>
+            </section>
+
+            <section class="timeline-panel" aria-labelledby="timeline-title">
+              <h3 id="timeline-title">Timeline</h3>
+              <ol id="timeline"></ol>
+            </section>
+          </section>
+        </section>
       </section>
     </main>
-
-    <footer class="site-footer">
-      <span>Qtcr Shopifyer Genesis Shopify</span>
-      <span>Concierge requests now. Shopify checkout later.</span>
-    </footer>
 
     <script src="./src/app.js" type="module"></script>
   </body>

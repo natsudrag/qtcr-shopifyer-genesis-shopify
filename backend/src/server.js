@@ -1,13 +1,22 @@
 const http = require("node:http");
 const {
+  advanceRequest,
+  assembleQuote,
   createRequest,
   getIntakeTemplate,
-  getRequest
+  getOpsConfig,
+  getRequest,
+  listRequests,
+  requestMissingDetails,
+  seedOperationsStore
 } = require("./requestWorkflow");
 
 const port = Number(process.env.PORT || 4201);
 const allowedOrigin = process.env.ALLOWED_ORIGIN || "http://localhost:4200";
 const store = new Map();
+const mockTeamToken = process.env.MOCK_TEAM_TOKEN || "QTCR-DEMO";
+
+seedOperationsStore(store);
 
 const server = http.createServer(async (request, response) => {
   setCorsHeaders(response);
@@ -28,6 +37,25 @@ const server = http.createServer(async (request, response) => {
 
     if (request.method === "GET" && url.pathname === "/api/concierge/intake-template") {
       sendJson(response, 200, getIntakeTemplate());
+      return;
+    }
+
+    if (url.pathname.startsWith("/api/ops")) {
+      assertMockTeamAccess(request);
+    }
+
+    if (request.method === "GET" && url.pathname === "/api/ops/workspace") {
+      sendJson(response, 200, {
+        config: getOpsConfig(),
+        requests: listRequests(store)
+      });
+      return;
+    }
+
+    if (request.method === "GET" && url.pathname === "/api/ops/requests") {
+      sendJson(response, 200, {
+        requests: listRequests(store, { status: url.searchParams.get("status") || undefined })
+      });
       return;
     }
 
@@ -52,6 +80,41 @@ const server = http.createServer(async (request, response) => {
       return;
     }
 
+    const opsRequestMatch = url.pathname.match(/^\/api\/ops\/requests\/([^/]+)$/);
+    if (request.method === "GET" && opsRequestMatch) {
+      const existing = getRequest(opsRequestMatch[1], store);
+      if (!existing) {
+        sendJson(response, 404, {
+          error: { code: "not_found", message: "Concierge request not found" }
+        });
+        return;
+      }
+
+      sendJson(response, 200, { request: existing });
+      return;
+    }
+
+    const missingDetailsMatch = url.pathname.match(/^\/api\/ops\/requests\/([^/]+)\/missing-details$/);
+    if (request.method === "POST" && missingDetailsMatch) {
+      const body = await readJsonBody(request);
+      sendJson(response, 200, { request: requestMissingDetails(missingDetailsMatch[1], body, store) });
+      return;
+    }
+
+    const quoteMatch = url.pathname.match(/^\/api\/ops\/requests\/([^/]+)\/quote$/);
+    if (request.method === "POST" && quoteMatch) {
+      const body = await readJsonBody(request);
+      sendJson(response, 200, { request: assembleQuote(quoteMatch[1], body, store) });
+      return;
+    }
+
+    const advanceMatch = url.pathname.match(/^\/api\/ops\/requests\/([^/]+)\/advance$/);
+    if (request.method === "POST" && advanceMatch) {
+      const body = await readJsonBody(request);
+      sendJson(response, 200, { request: advanceRequest(advanceMatch[1], body, store) });
+      return;
+    }
+
     sendJson(response, 404, { error: { code: "not_found", message: "Route not found" } });
   } catch (error) {
     sendJson(response, error.status || 500, {
@@ -66,7 +129,7 @@ const server = http.createServer(async (request, response) => {
 function setCorsHeaders(response) {
   response.setHeader("Access-Control-Allow-Origin", allowedOrigin);
   response.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
-  response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  response.setHeader("Access-Control-Allow-Headers", "Content-Type,x-qtcr-team-token");
 }
 
 function sendJson(response, statusCode, payload) {
@@ -108,6 +171,12 @@ function createHttpError(status, code, message) {
   error.status = status;
   error.code = code;
   return error;
+}
+
+function assertMockTeamAccess(request) {
+  if (request.headers["x-qtcr-team-token"] !== mockTeamToken) {
+    throw createHttpError(401, "unauthorized", "Mock team token is required");
+  }
 }
 
 if (require.main === module) {

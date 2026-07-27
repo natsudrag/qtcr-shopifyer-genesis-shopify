@@ -2,6 +2,8 @@
 
 Base path: `/api/concierge`
 
+Operations base path: `/api/ops`
+
 ## `GET /health`
 
 Returns service status.
@@ -16,6 +18,16 @@ Returns service status.
 ## `GET /api/concierge/intake-template`
 
 Returns allowed request modes, delivery presets, and field expectations for the frontend intake.
+
+## Operations Auth
+
+All `/api/ops/*` endpoints require this mock header in local development:
+
+```http
+x-qtcr-team-token: QTCR-DEMO
+```
+
+This is not production authentication.
 
 ## `POST /api/concierge/requests`
 
@@ -47,7 +59,7 @@ Response body:
 {
   "request": {
     "id": "QTCR-20260726-0001",
-    "status": "brief_ready",
+    "status": "new",
     "brief": {
       "product": {},
       "questions": [],
@@ -62,6 +74,68 @@ Response body:
 ## `GET /api/concierge/requests/:id`
 
 Returns a request from the in-memory store.
+
+## `GET /api/ops/workspace`
+
+Returns operation configuration plus seeded active requests.
+
+```json
+{
+  "config": {
+    "statuses": [
+      { "id": "new", "label": "New", "sequence": 1 },
+      { "id": "needs_details", "label": "Needs Details", "sequence": 2 },
+      { "id": "quoted", "label": "Quoted", "sequence": 3 },
+      { "id": "approved", "label": "Approved", "sequence": 4 },
+      { "id": "purchased", "label": "Purchased", "sequence": 5 },
+      { "id": "received_us", "label": "Received in U.S.", "sequence": 6 },
+      { "id": "in_transit", "label": "In Transit", "sequence": 7 },
+      { "id": "delivered", "label": "Delivered", "sequence": 8 }
+    ]
+  },
+  "requests": []
+}
+```
+
+## `GET /api/ops/requests`
+
+Lists requests. Optional query: `?status=quoted`.
+
+## `POST /api/ops/requests/:id/missing-details`
+
+Moves the request to `needs_details`, records the prompt, and adds it to the shopping brief questions.
+
+```json
+{
+  "prompt": "Please confirm size and acceptable substitute color."
+}
+```
+
+## `POST /api/ops/requests/:id/quote`
+
+Saves transparent quote lines and moves the request to `quoted`.
+
+```json
+{
+  "lines": [
+    { "id": "retailer_item", "label": "Retailer item", "amount": 128 },
+    { "id": "freight_handling", "label": "Freight and handling", "amount": 31 },
+    { "id": "concierge_service", "label": "Concierge service", "amount": 25 }
+  ],
+  "notes": "Reviewed by operator."
+}
+```
+
+## `POST /api/ops/requests/:id/advance`
+
+Advances a request through the lifecycle. The mock workflow allows one forward step at a time, with `needs_details` allowed from `new` or `quoted`.
+
+```json
+{
+  "status": "approved",
+  "note": "Customer approved quote by email."
+}
+```
 
 ## Error Shape
 

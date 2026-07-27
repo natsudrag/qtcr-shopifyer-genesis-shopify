@@ -16,6 +16,7 @@ The current frontend is a dependency-light static prototype. It emphasizes:
 - A calm intake workflow centered on the primary customer action.
 - A structured AI-ready shopping brief instead of an open-ended chat wall.
 - Clear human verification, preliminary-cost labeling, and risk/return guidance.
+- A mock protected internal workspace for operators to manage requests, quotes, missing details, and fulfillment stages.
 
 Future frontend candidates:
 
@@ -32,8 +33,14 @@ The backend is a Node HTTP skeleton with in-memory mocked data. It exposes:
 - Intake template metadata.
 - Concierge request creation.
 - Concierge request retrieval.
+- Mock team operations workspace records.
+- Missing-detail prompts.
+- Transparent quote drafting.
+- Lifecycle advancement through `New -> Needs Details -> Quoted -> Approved -> Purchased -> Received in U.S. -> In Transit -> Delivered`.
 
 The workflow module is intentionally isolated from HTTP handling so provider integrations can be swapped in behind stable contracts.
+
+Operations endpoints use a mock `x-qtcr-team-token` header. This documents a protected boundary without introducing production authentication before the identity provider is selected.
 
 ## Future Integrations
 

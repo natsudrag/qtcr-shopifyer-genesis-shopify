@@ -6,8 +6,8 @@ This is not a generic storefront. Shopify is expected to own customer accounts a
 
 ## Structure
 
-- `frontend/` contains the responsive product prototype.
-- `backend/` contains the mocked request workflow API and contracts.
+- `frontend/` contains the responsive customer prototype and mock internal operations workspace surface.
+- `backend/` contains the mocked request and operations workflow API contracts.
 - `docs/` captures architecture and integration notes.
 
 ## Run Locally
@@ -37,9 +37,14 @@ The current validation builds the static frontend into `frontend/dist/` and runs
 Included:
 
 - Premium responsive intake UI for URL, screenshot, and natural-language shopping requests.
+- Mock protected shopper-operations workspace for team users.
 - AI-style structured brief prototype with product extraction, clarifying questions, preliminary landed-cost range, risk/return guidance, and human verification.
-- Backend API skeleton with mocked request creation, retrieval, and quote status.
+- Backend API skeleton with mocked request creation, queue retrieval, missing-detail requests, transparent quote assembly, and status advancement.
 - Documentation for architecture, API contracts, and next integration steps.
+
+Operations lifecycle:
+
+`New -> Needs Details -> Quoted -> Approved -> Purchased -> Received in U.S. -> In Transit -> Delivered`
 
 Excluded by design:
 
@@ -48,12 +53,14 @@ Excluded by design:
 - External AI provider calls.
 - Product scraping or marketplace automation.
 - Durable database persistence.
+- Production authentication.
 
-## GitHub Repository Status
+## Mock Team Access
 
-The connected GitHub capability available in this session supports repository lookup and file operations, but it does not expose a create-repository action. This project has been initialized locally with Git. To finish remote setup, create an empty GitHub repository and then run:
+The frontend workspace includes a demo access screen. The backend operations endpoints require the mock header:
 
 ```bash
-git remote add origin <repository-url>
-git push -u origin main
+x-qtcr-team-token: QTCR-DEMO
 ```
+
+This is a local prototype guard only, not production auth.
