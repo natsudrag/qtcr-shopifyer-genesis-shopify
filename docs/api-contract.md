@@ -11,7 +11,7 @@ Returns service status.
 ```json
 {
   "status": "ok",
-  "service": "stream-buy-gen-concierge-api"
+  "service": "stream-buy-with-gen-concierge-api"
 }
 ```
 
@@ -55,7 +55,7 @@ Returns public mock content for the customer-facing carousel.
 All `/api/ops/*` endpoints require this mock header in local development:
 
 ```http
-x-stream-buy-gen-team-token: SBG-DEMO
+x-stream-buy-with-gen-team-token: SBWG-DEMO
 ```
 
 This is not production authentication.
@@ -89,7 +89,7 @@ Response body:
 ```json
 {
   "request": {
-    "id": "SBG-20260726-0001",
+    "id": "SBWG-20260726-0001",
     "status": "new",
     "brief": {
       "product": {},
@@ -159,7 +159,7 @@ Validates and echoes updated mock manager content. This does not persist to dura
     {
       "id": "clear-total",
       "customerName": "Sofia M.",
-      "quote": "Stream Buy Gen showed the product price, import reserve, handling, and delivery before checkout.",
+      "quote": "Stream Buy With Gen showed the product price, import reserve, handling, and delivery before checkout.",
       "approvedForCarousel": true
     }
   ]

@@ -103,7 +103,7 @@ const defaultMarketingContent = {
       type: "customer_feedback",
       eyebrow: "Client feedback",
       title: "The quote felt transparent before I approved it.",
-      description: "Mock testimonial for the Stream Buy Gen service experience: refined sourcing, human verification, and progress updates without live inventory claims.",
+      description: "Mock testimonial for the Stream Buy With Gen service experience: refined sourcing, human verification, and progress updates without live inventory claims.",
       productName: "Accessories request",
       priceLabel: "Delivered to Escazu",
       category: "Accessories",
@@ -116,15 +116,15 @@ const defaultMarketingContent = {
     {
       id: "clear-total",
       customerName: "Sofia M.",
-      quote: "Stream Buy Gen showed the product price, import reserve, handling, and delivery before checkout.",
-      requestId: "SBG-20260726-0002",
+      quote: "Stream Buy With Gen showed the product price, import reserve, handling, and delivery before checkout.",
+      requestId: "SBWG-20260726-0002",
       approvedForCarousel: true
     },
     {
       id: "found-size",
       customerName: "Diego P.",
       quote: "The team asked the right sizing question before buying, which saved a return problem.",
-      requestId: "SBG-20260726-0003",
+      requestId: "SBWG-20260726-0003",
       approvedForCarousel: false
     }
   ]
@@ -153,7 +153,7 @@ function getOpsConfig() {
     quoteLineDefaults: defaultQuoteLines,
     auth: {
       mode: "mock_header",
-      header: "x-stream-buy-gen-team-token"
+      header: "x-stream-buy-with-gen-team-token"
     }
   };
 }
@@ -194,7 +194,7 @@ function seedOperationsStore(store) {
 
   const seeded = [
     createSeedRequest({
-      id: "SBG-20260726-0004",
+      id: "SBWG-20260726-0004",
       status: "new",
       customer: { name: "Mariana R.", email: "mariana@example.com" },
       requestType: "url",
@@ -233,7 +233,7 @@ function seedOperationsStore(store) {
       timeline: ["Request received from product URL", "Shopping brief prepared with fit and availability checks"]
     }),
     createSeedRequest({
-      id: "SBG-20260726-0003",
+      id: "SBWG-20260726-0003",
       status: "needs_details",
       customer: { name: "Diego P.", email: "diego@example.com" },
       requestType: "screenshot",
@@ -266,7 +266,7 @@ function seedOperationsStore(store) {
       timeline: ["Screenshot request received", "Missing shade and substitution preference requested"]
     }),
     createSeedRequest({
-      id: "SBG-20260726-0002",
+      id: "SBWG-20260726-0002",
       status: "quoted",
       customer: { name: "Sofia M.", email: "sofia@example.com" },
       requestType: "natural_language",
@@ -595,7 +595,7 @@ function createRequestId(date, sequence) {
   const yyyy = date.getUTCFullYear();
   const mm = String(date.getUTCMonth() + 1).padStart(2, "0");
   const dd = String(date.getUTCDate()).padStart(2, "0");
-  return `SBG-${yyyy}${mm}${dd}-${String(sequence).padStart(4, "0")}`;
+  return `SBWG-${yyyy}${mm}${dd}-${String(sequence).padStart(4, "0")}`;
 }
 
 function createWorkflowError(code, message, status = 400) {
@@ -660,9 +660,9 @@ function normalizeTestimonial(testimonial = {}) {
 
   return {
     id: String(testimonial.id),
-    customerName: stringOrFallback(testimonial.customerName, "Stream Buy Gen customer"),
+    customerName: stringOrFallback(testimonial.customerName, "Stream Buy With Gen customer"),
     quote: String(testimonial.quote),
-    requestId: stringOrFallback(testimonial.requestId, "SBG-MOCK"),
+    requestId: stringOrFallback(testimonial.requestId, "SBWG-MOCK"),
     approvedForCarousel: Boolean(testimonial.approvedForCarousel)
   };
 }

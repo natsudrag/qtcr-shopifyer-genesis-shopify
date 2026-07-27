@@ -66,7 +66,7 @@ const marketingContent = {
       eyebrow: "Client feedback",
       title: "The quote felt transparent before I approved it.",
       description:
-        "Mock testimonial for the Stream Buy Gen service experience: refined sourcing, human verification, and progress updates without live inventory claims.",
+        "Mock testimonial for the Stream Buy With Gen service experience: refined sourcing, human verification, and progress updates without live inventory claims.",
       productName: "Accessories request",
       priceLabel: "Delivered to Costa Rica",
       category: "Accessories",
@@ -79,7 +79,7 @@ const marketingContent = {
     {
       id: "clear-total",
       customerName: "Sofia M.",
-      quote: "Stream Buy Gen showed the product price, import reserve, handling, and delivery before checkout.",
+      quote: "Stream Buy With Gen showed the product price, import reserve, handling, and delivery before checkout.",
       approvedForCarousel: true
     },
     {
@@ -93,7 +93,7 @@ const marketingContent = {
 
 const requests = [
   {
-    id: "SBG-20260726-0004",
+    id: "SBWG-20260726-0004",
     customer: "Mariana R.",
     channel: "URL",
     status: "new",
@@ -121,7 +121,7 @@ const requests = [
     timeline: ["Request received from product URL", "Shopping brief prepared with fit and availability checks"]
   },
   {
-    id: "SBG-20260726-0003",
+    id: "SBWG-20260726-0003",
     customer: "Diego P.",
     channel: "Screenshot",
     status: "needs_details",
@@ -149,7 +149,7 @@ const requests = [
     timeline: ["Screenshot request received", "Missing shade and substitution preference requested"]
   },
   {
-    id: "SBG-20260726-0002",
+    id: "SBWG-20260726-0002",
     customer: "Sofia M.",
     channel: "Request",
     status: "quoted",
@@ -177,7 +177,7 @@ const requests = [
     timeline: ["Natural-language request normalized", "Quote assembled and waiting for customer approval"]
   },
   {
-    id: "SBG-20260725-0009",
+    id: "SBWG-20260725-0009",
     customer: "Andres V.",
     channel: "URL",
     status: "in_transit",

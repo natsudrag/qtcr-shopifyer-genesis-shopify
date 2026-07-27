@@ -16,7 +16,7 @@ const {
 const port = Number(process.env.PORT || 4201);
 const allowedOrigin = process.env.ALLOWED_ORIGIN || "http://localhost:4200";
 const store = new Map();
-const mockTeamToken = process.env.MOCK_TEAM_TOKEN || "SBG-DEMO";
+const mockTeamToken = process.env.MOCK_TEAM_TOKEN || "SBWG-DEMO";
 
 seedOperationsStore(store);
 
@@ -33,7 +33,7 @@ const server = http.createServer(async (request, response) => {
 
   try {
     if (request.method === "GET" && url.pathname === "/health") {
-      sendJson(response, 200, { status: "ok", service: "stream-buy-gen-concierge-api" });
+      sendJson(response, 200, { status: "ok", service: "stream-buy-with-gen-concierge-api" });
       return;
     }
 
@@ -148,7 +148,7 @@ const server = http.createServer(async (request, response) => {
 function setCorsHeaders(response) {
   response.setHeader("Access-Control-Allow-Origin", allowedOrigin);
   response.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,OPTIONS");
-  response.setHeader("Access-Control-Allow-Headers", "Content-Type,x-stream-buy-gen-team-token");
+  response.setHeader("Access-Control-Allow-Headers", "Content-Type,x-stream-buy-with-gen-team-token");
 }
 
 function sendJson(response, statusCode, payload) {
@@ -193,14 +193,14 @@ function createHttpError(status, code, message) {
 }
 
 function assertMockTeamAccess(request) {
-  if (request.headers["x-stream-buy-gen-team-token"] !== mockTeamToken) {
+  if (request.headers["x-stream-buy-with-gen-team-token"] !== mockTeamToken) {
     throw createHttpError(401, "unauthorized", "Mock team token is required");
   }
 }
 
 if (require.main === module) {
   server.listen(port, () => {
-    console.log(`SBG concierge API running at http://localhost:${port}`);
+    console.log(`SBWG concierge API running at http://localhost:${port}`);
   });
 }
 
