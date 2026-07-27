@@ -13,10 +13,13 @@ Location: `frontend/`
 The current frontend is a dependency-light static prototype. It emphasizes:
 
 - A premium editorial brand surface without turning the app into a marketing landing page.
+- A stronger playful retro-editorial hero with local product-style visual placeholders instead of external image hotlinks.
+- A customer-facing carousel for curated product finds and verified feedback.
 - A calm intake workflow centered on the primary customer action.
 - A structured AI-ready shopping brief instead of an open-ended chat wall.
-- Clear human verification, preliminary-cost labeling, and risk/return guidance.
+- Clear human verification, preliminary-cost labeling, risk/return guidance, and emerald order progress.
 - A mock protected internal workspace for operators to manage requests, quotes, missing details, and fulfillment stages.
+- A manager content curation area for campaign windows, carousel products, and approved testimonials.
 
 Future frontend candidates:
 
@@ -34,6 +37,7 @@ The backend is a Node HTTP skeleton with in-memory mocked data. It exposes:
 - Concierge request creation.
 - Concierge request retrieval.
 - Mock team operations workspace records.
+- Mock marketing content for customer carousel and manager curation.
 - Missing-detail prompts.
 - Transparent quote drafting.
 - Lifecycle advancement through `New -> Needs Details -> Quoted -> Approved -> Purchased -> Received in U.S. -> In Transit -> Delivered`.
@@ -41,6 +45,8 @@ The backend is a Node HTTP skeleton with in-memory mocked data. It exposes:
 The workflow module is intentionally isolated from HTTP handling so provider integrations can be swapped in behind stable contracts.
 
 Operations endpoints use a mock `x-qtcr-team-token` header. This documents a protected boundary without introducing production authentication before the identity provider is selected.
+
+Carousel and testimonial records are mock-only. They are shaped as future CMS or admin records but do not persist beyond the in-memory/local prototype.
 
 ## Future Integrations
 

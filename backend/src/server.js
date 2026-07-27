@@ -4,11 +4,13 @@ const {
   assembleQuote,
   createRequest,
   getIntakeTemplate,
+  getMarketingContent,
   getOpsConfig,
   getRequest,
   listRequests,
   requestMissingDetails,
-  seedOperationsStore
+  seedOperationsStore,
+  updateMarketingContent
 } = require("./requestWorkflow");
 
 const port = Number(process.env.PORT || 4201);
@@ -40,6 +42,11 @@ const server = http.createServer(async (request, response) => {
       return;
     }
 
+    if (request.method === "GET" && url.pathname === "/api/concierge/marketing-content") {
+      sendJson(response, 200, { content: getMarketingContent() });
+      return;
+    }
+
     if (url.pathname.startsWith("/api/ops")) {
       assertMockTeamAccess(request);
     }
@@ -47,8 +54,20 @@ const server = http.createServer(async (request, response) => {
     if (request.method === "GET" && url.pathname === "/api/ops/workspace") {
       sendJson(response, 200, {
         config: getOpsConfig(),
-        requests: listRequests(store)
+        requests: listRequests(store),
+        marketingContent: getMarketingContent()
       });
+      return;
+    }
+
+    if (request.method === "GET" && url.pathname === "/api/ops/marketing-content") {
+      sendJson(response, 200, { content: getMarketingContent() });
+      return;
+    }
+
+    if (request.method === "PUT" && url.pathname === "/api/ops/marketing-content") {
+      const body = await readJsonBody(request);
+      sendJson(response, 200, { content: updateMarketingContent(body) });
       return;
     }
 
@@ -128,7 +147,7 @@ const server = http.createServer(async (request, response) => {
 
 function setCorsHeaders(response) {
   response.setHeader("Access-Control-Allow-Origin", allowedOrigin);
-  response.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+  response.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,OPTIONS");
   response.setHeader("Access-Control-Allow-Headers", "Content-Type,x-qtcr-team-token");
 }
 

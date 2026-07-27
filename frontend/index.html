@@ -3,29 +3,96 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Qtcr Ops Workspace</title>
+    <title>Qtcr Shopifyer Genesis Shopify</title>
     <meta
       name="description"
-      content="Mock protected team workspace for managing Qtcr concierge requests, briefs, transparent quotes, and fulfillment stages."
+      content="Premium U.S.-to-Costa-Rica personal-shopping concierge with playful editorial visuals and clear request tracking."
     />
     <link rel="stylesheet" href="./styles/main.css" />
   </head>
   <body>
-    <main class="ops-shell" id="workspace">
-      <section class="access-screen" id="access-screen" aria-labelledby="access-title">
+    <header class="site-header" aria-label="Primary">
+      <a class="brand-mark" href="#top" aria-label="Qtcr home">
+        <span class="brand-badge">QTCR</span>
+        <span>
+          <strong>Shopifyer Genesis</strong>
+          <small>U.S. to Costa Rica concierge</small>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="Sections">
+        <a href="#finds">Finds</a>
+        <a href="#progress">Progress</a>
+        <a href="#team-access">Team</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="customer-hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Verified before checkout</p>
+          <h1 id="hero-title">The U.S. find you want, made simple.</h1>
+          <p>
+            Paste a product link, send a screenshot, or describe what you want. Qtcr turns the request
+            into a human-verified shopping brief, transparent quote, and clear delivery path to Costa Rica.
+          </p>
+          <form class="request-strip" aria-label="Concierge request preview">
+            <label for="customer-request">Start with a product URL or request</label>
+            <div>
+              <input id="customer-request" value="https://example.com/cherry-carry-on" />
+              <button class="button primary" type="button">Preview brief</button>
+            </div>
+          </form>
+        </div>
+
+        <section class="hero-carousel" id="finds" aria-labelledby="carousel-title">
+          <div class="carousel-topline">
+            <div>
+              <p class="eyebrow">Curated campaign</p>
+              <h2 id="carousel-title">Verified finds and customer notes</h2>
+            </div>
+            <span class="campaign-badge" id="campaign-window-badge"></span>
+            <div class="carousel-controls">
+              <button class="icon-button" id="carousel-prev" type="button" aria-label="Previous carousel slide">Prev</button>
+              <button class="icon-button" id="carousel-next" type="button" aria-label="Next carousel slide">Next</button>
+            </div>
+          </div>
+          <div class="carousel-tabs" id="carousel-tabs" role="tablist" aria-label="Carousel slides"></div>
+          <div class="carousel-stage" id="carousel-stage" aria-live="polite"></div>
+          <p class="sr-only" id="carousel-live" aria-live="polite"></p>
+        </section>
+      </section>
+
+      <section class="progress-preview" id="progress" aria-labelledby="progress-title">
+        <div>
+          <p class="eyebrow">Order clarity</p>
+          <h2 id="progress-title">Every request gets a green path forward.</h2>
+          <p>
+            The concierge lifecycle stays visible from the first brief through delivery, with emerald progress
+            states reserved for order movement.
+          </p>
+        </div>
+        <div class="progress-card">
+          <div class="progress-card-header">
+            <span class="status-pill" id="sample-progress-label">Quoted</span>
+            <button class="button secondary" id="sample-progress-next" type="button">Update progress</button>
+          </div>
+          <ol class="progress-track green" id="sample-progress-track" aria-label="Sample order progress"></ol>
+        </div>
+      </section>
+
+      <section class="team-gateway" id="team-access" aria-labelledby="access-title">
         <div class="brand-card">
           <span class="brand-badge">QTCR</span>
           <p class="eyebrow">Mock protected workspace</p>
-          <h1 id="access-title">Shopper operations, before Shopify checkout.</h1>
+          <h2 id="access-title">Shopper operations, before Shopify checkout.</h2>
           <p>
-            A calm internal console for reviewing concierge requests, verifying AI shopping briefs,
-            building transparent quotes, and tracking the U.S.-to-Costa-Rica journey.
+            Operators review AI shopping briefs, request details, assemble transparent quotes, manage campaign
+            content, and advance fulfillment stages.
           </p>
         </div>
 
         <form class="access-panel" id="access-form">
           <h2>Team access</h2>
-          <p>Use the demo passcode to enter this local prototype.</p>
           <label>
             Passcode
             <input autocomplete="off" id="passcode" name="passcode" type="password" value="QTCR-DEMO" />
@@ -37,7 +104,7 @@
 
       <section class="dashboard hidden" id="dashboard" aria-labelledby="dashboard-title">
         <header class="ops-header">
-          <a class="brand-mark" href="#workspace" aria-label="Qtcr operations home">
+          <a class="brand-mark" href="#top" aria-label="Qtcr operations home">
             <span class="brand-badge">QTCR</span>
             <span>
               <strong>Shopifyer Genesis Ops</strong>
@@ -55,7 +122,7 @@
         <section class="ops-hero" aria-labelledby="dashboard-title">
           <div>
             <p class="eyebrow">Internal shopper operations</p>
-            <h1 id="dashboard-title">Requests that need clear decisions.</h1>
+            <h2 id="dashboard-title">Requests that need clear decisions.</h2>
             <p>
               Operators can inspect AI-prepared briefs, ask for missing details, assemble transparent quotes,
               and move requests through every concierge fulfillment stage.
@@ -78,6 +145,35 @@
               </div>
             </dl>
           </div>
+        </section>
+
+        <section class="manager-panel" aria-labelledby="manager-title">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Manager content</p>
+              <h2 id="manager-title">Campaign and carousel curation</h2>
+            </div>
+            <button class="button secondary" id="save-content" type="button">Apply mock content</button>
+          </div>
+          <div class="manager-grid">
+            <label>
+              Campaign headline
+              <input id="campaign-headline" />
+            </label>
+            <label>
+              Campaign window
+              <input id="campaign-window" />
+            </label>
+            <label>
+              Featured slide
+              <select id="featured-slide"></select>
+            </label>
+            <label>
+              Approved feedback
+              <select id="approved-feedback"></select>
+            </label>
+          </div>
+          <div class="content-review" id="content-review"></div>
         </section>
 
         <section class="status-lane" aria-label="Request lifecycle">

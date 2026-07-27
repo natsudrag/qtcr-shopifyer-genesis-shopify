@@ -9,13 +9,71 @@ const statuses = [
   { id: "delivered", label: "Delivered" }
 ];
 
+const marketingContent = {
+  campaignWindow: {
+    name: "Summer travel drop",
+    headline: "The U.S. find you want, made simple",
+    startsAt: "Jul 27",
+    endsAt: "Aug 16",
+    status: "Draft"
+  },
+  carouselSlides: [
+    {
+      id: "carry-on",
+      type: "curated_product",
+      eyebrow: "Curated find",
+      title: "Cherry carry-on, Costa Rica-ready",
+      description:
+        "A verified luggage request with color fallback, freight checks, and a clear landed-cost range.",
+      productName: "Expandable carry-on",
+      priceLabel: "Estimate $451 - $490 landed",
+      accent: "cherry"
+    },
+    {
+      id: "headphones",
+      type: "curated_product",
+      eyebrow: "Verified quote",
+      title: "Travel headphones without checkout surprises",
+      description:
+        "Sourced from a U.S. retailer, checked for warranty risk, battery shipping rules, and local delivery.",
+      productName: "Noise-canceling headphones",
+      priceLabel: "Estimate $462 - $514 landed",
+      accent: "emerald"
+    },
+    {
+      id: "feedback",
+      type: "customer_feedback",
+      eyebrow: "Customer feedback",
+      title: "They made the total clear before I said yes.",
+      description:
+        "Mock testimonial highlighting quote transparency, human verification, and delivery progress updates.",
+      productName: "Beauty bundle",
+      priceLabel: "Delivered to Escazu",
+      accent: "lilac"
+    }
+  ],
+  testimonials: [
+    {
+      id: "clear-total",
+      customerName: "Sofia M.",
+      quote: "Qtcr showed the product price, import reserve, handling, and delivery before checkout.",
+      approvedForCarousel: true
+    },
+    {
+      id: "found-size",
+      customerName: "Diego P.",
+      quote: "The team asked the right sizing question before buying, which saved a return problem.",
+      approvedForCarousel: false
+    }
+  ]
+};
+
 const requests = [
   {
     id: "QTCR-20260726-0004",
     customer: "Mariana R.",
     channel: "URL",
     status: "new",
-    priority: "High",
     dueBy: "Today 4:00 PM",
     title: "Cherry red Away carry-on",
     source: "awaytravel.com",
@@ -44,7 +102,6 @@ const requests = [
     customer: "Diego P.",
     channel: "Screenshot",
     status: "needs_details",
-    priority: "Medium",
     dueBy: "Tomorrow",
     title: "Ivory platform sandals",
     source: "Screenshot from Nordstrom",
@@ -73,7 +130,6 @@ const requests = [
     customer: "Sofia M.",
     channel: "Request",
     status: "quoted",
-    priority: "High",
     dueBy: "Quote expires Friday",
     title: "Noise-canceling headphones",
     source: "Concierge sourced",
@@ -84,7 +140,7 @@ const requests = [
       retailerPrice: "$328.00",
       extractedFrom: "Natural-language request",
       questions: ["Confirm black over silver.", "Confirm U.S. warranty tradeoff."],
-      risks: ["Electronics warranty service may require U.S. return routing.", "Battery shipping rules can affect carrier choice."]
+      risks: ["Electronics warranty support may require U.S. return routing.", "Battery shipping rules can affect carrier choice."]
     },
     quote: [
       ["Retailer item", 328],
@@ -102,7 +158,6 @@ const requests = [
     customer: "Andres V.",
     channel: "URL",
     status: "in_transit",
-    priority: "Normal",
     dueBy: "ETA Aug 2",
     title: "Camera lens filter kit",
     source: "bhphotovideo.com",
@@ -130,8 +185,9 @@ const requests = [
 
 let selectedId = requests[0].id;
 let activeFilter = "all";
+let activeSlideIndex = 0;
+let sampleProgressIndex = statuses.findIndex((status) => status.id === "quoted");
 
-const accessScreen = document.querySelector("#access-screen");
 const dashboard = document.querySelector("#dashboard");
 const accessForm = document.querySelector("#access-form");
 const lockButton = document.querySelector("#lock-button");
@@ -148,14 +204,85 @@ function selectedRequest() {
 }
 
 function enterWorkspace() {
-  accessScreen.classList.add("hidden");
   dashboard.classList.remove("hidden");
+  dashboard.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" });
   renderWorkspace();
 }
 
 function lockWorkspace() {
   dashboard.classList.add("hidden");
-  accessScreen.classList.remove("hidden");
+  document.querySelector("#team-access").scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth" });
+}
+
+function renderCarousel() {
+  const tabs = document.querySelector("#carousel-tabs");
+  const activeSlide = marketingContent.carouselSlides[activeSlideIndex];
+
+  tabs.replaceChildren(
+    ...marketingContent.carouselSlides.map((slide, index) => {
+      const tab = document.createElement("button");
+      tab.type = "button";
+      tab.id = `carousel-tab-${slide.id}`;
+      tab.className = `carousel-tab ${index === activeSlideIndex ? "active" : ""}`;
+      tab.setAttribute("role", "tab");
+      tab.setAttribute("aria-selected", String(index === activeSlideIndex));
+      tab.setAttribute("aria-controls", "carousel-stage");
+      tab.textContent = slide.eyebrow;
+      tab.addEventListener("click", () => setActiveSlide(index));
+      return tab;
+    })
+  );
+
+  document.querySelector("#carousel-stage").replaceChildren(createSlide(activeSlide));
+  document.querySelector("#carousel-live").textContent = `${activeSlide.eyebrow}: ${activeSlide.title}`;
+  renderMarketingSurface();
+}
+
+function renderMarketingSurface() {
+  document.querySelector("#hero-title").textContent = marketingContent.campaignWindow.headline;
+  document.querySelector("#campaign-window-badge").textContent =
+    `${marketingContent.campaignWindow.name}: ${marketingContent.campaignWindow.startsAt} to ${marketingContent.campaignWindow.endsAt}`;
+}
+
+function setActiveSlide(index) {
+  activeSlideIndex = (index + marketingContent.carouselSlides.length) % marketingContent.carouselSlides.length;
+  renderCarousel();
+}
+
+function createSlide(slide) {
+  const article = document.createElement("article");
+  article.className = `carousel-slide accent-${slide.accent}`;
+  article.setAttribute("role", "tabpanel");
+  article.setAttribute("aria-labelledby", `carousel-tab-${slide.id}`);
+  article.innerHTML = `
+    <div class="product-poster ${slide.id}" role="img" aria-label="${slide.productName} editorial product visual">
+      <span class="poster-price">${slide.priceLabel}</span>
+      <span class="poster-object"></span>
+      <span class="poster-shadow"></span>
+    </div>
+    <div class="slide-copy">
+      <p class="eyebrow">${slide.type === "customer_feedback" ? "Verified feedback" : "Curated product find"}</p>
+      <h3>${slide.title}</h3>
+      <p>${slide.description}</p>
+      <span>${slide.productName}</span>
+    </div>
+  `;
+  return article;
+}
+
+function renderSampleProgress() {
+  const track = document.querySelector("#sample-progress-track");
+  document.querySelector("#sample-progress-label").textContent = statuses[sampleProgressIndex].label;
+  track.replaceChildren(...createProgressItems(sampleProgressIndex));
+}
+
+function createProgressItems(activeIndex) {
+  return statuses.map((status, index) => {
+    const item = document.createElement("li");
+    item.className = index <= activeIndex ? "complete" : "";
+    item.innerHTML = `<span>${index + 1}</span><strong>${status.label}</strong>`;
+    return item;
+  });
 }
 
 function renderWorkspace() {
@@ -164,6 +291,7 @@ function renderWorkspace() {
   renderStatusTrack();
   renderRequestList();
   renderDetails();
+  renderManagerContent();
 }
 
 function renderStatusControls() {
@@ -187,15 +315,7 @@ function renderMetrics() {
 function renderStatusTrack() {
   const selected = selectedRequest();
   const selectedIndex = statuses.findIndex((status) => status.id === selected.status);
-  const track = document.querySelector("#status-track");
-  track.replaceChildren(
-    ...statuses.map((status, index) => {
-      const item = document.createElement("li");
-      item.className = index <= selectedIndex ? "complete" : "";
-      item.innerHTML = `<span>${index + 1}</span><strong>${status.label}</strong>`;
-      return item;
-    })
-  );
+  document.querySelector("#status-track").replaceChildren(...createProgressItems(selectedIndex));
 }
 
 function renderRequestList() {
@@ -244,6 +364,29 @@ function renderDetails() {
   statusSelect.value = request.status;
 }
 
+function renderManagerContent() {
+  document.querySelector("#campaign-headline").value = marketingContent.campaignWindow.headline;
+  document.querySelector("#campaign-window").value =
+    `${marketingContent.campaignWindow.startsAt} to ${marketingContent.campaignWindow.endsAt}`;
+  document.querySelector("#featured-slide").replaceChildren(
+    ...marketingContent.carouselSlides.map((slide) => new Option(slide.title, slide.id))
+  );
+  document.querySelector("#featured-slide").value = marketingContent.carouselSlides[activeSlideIndex].id;
+  document.querySelector("#approved-feedback").replaceChildren(
+    ...marketingContent.testimonials.map((testimonial) => new Option(testimonial.customerName, testimonial.id))
+  );
+  document.querySelector("#approved-feedback").value =
+    marketingContent.testimonials.find((testimonial) => testimonial.approvedForCarousel)?.id || marketingContent.testimonials[0].id;
+  document.querySelector("#content-review").replaceChildren(
+    ...marketingContent.carouselSlides.map((slide) => {
+      const item = document.createElement("article");
+      item.className = "content-chip";
+      item.innerHTML = `<strong>${slide.title}</strong><span>${slide.type.replace("_", " ")}</span>`;
+      return item;
+    })
+  );
+}
+
 function field(label, value) {
   const wrapper = document.createElement("div");
   wrapper.innerHTML = `<dt>${label}</dt><dd>${value}</dd>`;
@@ -290,6 +433,17 @@ function addTimeline(request, entry) {
   request.timeline.unshift(entry);
 }
 
+function prefersReducedMotion() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+document.querySelector("#carousel-prev").addEventListener("click", () => setActiveSlide(activeSlideIndex - 1));
+document.querySelector("#carousel-next").addEventListener("click", () => setActiveSlide(activeSlideIndex + 1));
+document.querySelector("#sample-progress-next").addEventListener("click", () => {
+  sampleProgressIndex = Math.min(sampleProgressIndex + 1, statuses.length - 1);
+  renderSampleProgress();
+});
+
 accessForm.addEventListener("submit", (event) => {
   event.preventDefault();
   enterWorkspace();
@@ -300,6 +454,24 @@ lockButton.addEventListener("click", lockWorkspace);
 statusFilter.addEventListener("change", () => {
   activeFilter = statusFilter.value;
   renderRequestList();
+});
+
+document.querySelector("#save-content").addEventListener("click", () => {
+  marketingContent.campaignWindow.headline =
+    document.querySelector("#campaign-headline").value.trim() || "The U.S. find you want, made simple";
+  const campaignWindow = document.querySelector("#campaign-window").value.trim();
+  if (campaignWindow) {
+    const [startsAt, endsAt] = campaignWindow.split(" to ");
+    marketingContent.campaignWindow.startsAt = startsAt || marketingContent.campaignWindow.startsAt;
+    marketingContent.campaignWindow.endsAt = endsAt || marketingContent.campaignWindow.endsAt;
+  }
+  const selectedSlideId = document.querySelector("#featured-slide").value;
+  activeSlideIndex = marketingContent.carouselSlides.findIndex((slide) => slide.id === selectedSlideId);
+  marketingContent.testimonials.forEach((testimonial) => {
+    testimonial.approvedForCarousel = testimonial.id === document.querySelector("#approved-feedback").value;
+  });
+  renderCarousel();
+  renderManagerContent();
 });
 
 document.querySelector("#request-details").addEventListener("click", () => {
@@ -326,3 +498,6 @@ document.querySelector("#advance-status").addEventListener("click", () => {
   addTimeline(request, `Status advanced to ${statusLabel(request.status)}.`);
   renderWorkspace();
 });
+
+renderCarousel();
+renderSampleProgress();

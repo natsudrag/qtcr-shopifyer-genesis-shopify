@@ -6,12 +6,14 @@ const {
   assembleQuote,
   createRequest,
   getIntakeTemplate,
+  getMarketingContent,
   getOpsConfig,
   getRequest,
   listRequests,
   normalizePayload,
   requestMissingDetails,
-  seedOperationsStore
+  seedOperationsStore,
+  updateMarketingContent
 } = require("../src/requestWorkflow");
 
 test("intake template exposes supported request modes", () => {
@@ -33,6 +35,49 @@ test("ops config exposes the full concierge lifecycle in order", () => {
   );
   assert.equal(config.statuses[0].label, "New");
   assert.equal(config.statuses.at(-1).label, "Delivered");
+});
+
+test("marketing content exposes carousel slides and testimonials", () => {
+  const content = getMarketingContent();
+
+  assert.equal(content.campaignWindow.headline, "The U.S. find you want, made simple");
+  assert.ok(content.carouselSlides.some((slide) => slide.type === "curated_product"));
+  assert.ok(content.carouselSlides.some((slide) => slide.type === "customer_feedback"));
+  assert.ok(content.testimonials.some((testimonial) => testimonial.approvedForCarousel));
+});
+
+test("updateMarketingContent validates manager carousel content", () => {
+  const content = updateMarketingContent({
+    campaignWindow: {
+      headline: "Weekly verified finds"
+    },
+    carouselSlides: [
+      {
+        id: "sample-slide",
+        title: "Verified jacket request",
+        accent: "emerald"
+      }
+    ],
+    testimonials: [
+      {
+        id: "sample-testimonial",
+        quote: "The quote was easy to understand.",
+        approvedForCarousel: true
+      }
+    ]
+  });
+
+  assert.equal(content.campaignWindow.headline, "Weekly verified finds");
+  assert.equal(content.carouselSlides[0].accent, "emerald");
+  assert.equal(content.testimonials[0].customerName, "Qtcr customer");
+  assert.equal(content.persistence, "mock_only");
+});
+
+test("updateMarketingContent rejects incomplete carousel slides", () => {
+  assert.throws(
+    () => updateMarketingContent({ carouselSlides: [{ id: "missing-title" }] }),
+    /carousel slide id and title are required/
+  );
 });
 
 test("createRequest stores a new structured operations request", () => {

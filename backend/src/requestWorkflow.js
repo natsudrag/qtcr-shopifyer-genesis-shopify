@@ -49,6 +49,65 @@ const defaultQuoteLines = [
   { id: "concierge_service", label: "Concierge service", amount: 22 }
 ];
 
+const defaultMarketingContent = {
+  campaignWindow: {
+    id: "summer-travel-drop",
+    name: "Summer travel drop",
+    headline: "The U.S. find you want, made simple",
+    startsAt: "2026-07-27",
+    endsAt: "2026-08-16",
+    status: "draft"
+  },
+  carouselSlides: [
+    {
+      id: "carry-on",
+      type: "curated_product",
+      eyebrow: "Curated find",
+      title: "Cherry carry-on, Costa Rica-ready",
+      description: "A verified luggage request with color fallback, freight checks, and a clear landed-cost range.",
+      productName: "Expandable carry-on",
+      priceLabel: "Estimate $451 - $490 landed",
+      accent: "cherry"
+    },
+    {
+      id: "headphones",
+      type: "curated_product",
+      eyebrow: "Verified quote",
+      title: "Travel headphones without checkout surprises",
+      description: "Sourced from a U.S. retailer, checked for warranty risk, battery shipping rules, and local delivery.",
+      productName: "Noise-canceling headphones",
+      priceLabel: "Estimate $462 - $514 landed",
+      accent: "emerald"
+    },
+    {
+      id: "feedback",
+      type: "customer_feedback",
+      eyebrow: "Customer note",
+      title: "They made the total clear before I said yes.",
+      description: "Mock testimonial highlighting quote transparency, human verification, and delivery progress updates.",
+      productName: "Beauty bundle",
+      priceLabel: "Delivered to Escazu",
+      accent: "lilac"
+    }
+  ],
+  testimonials: [
+    {
+      id: "clear-total",
+      customerName: "Sofia M.",
+      quote: "Qtcr showed the product price, import reserve, handling, and delivery before checkout.",
+      requestId: "QTCR-20260726-0002",
+      approvedForCarousel: true
+    },
+    {
+      id: "found-size",
+      customerName: "Diego P.",
+      quote: "The team asked the right sizing question before buying, which saved a return problem.",
+      requestId: "QTCR-20260726-0003",
+      approvedForCarousel: false
+    }
+  ]
+};
+
 function getIntakeTemplate() {
   return {
     requestTypes: [
@@ -74,6 +133,35 @@ function getOpsConfig() {
       mode: "mock_header",
       header: "x-qtcr-team-token"
     }
+  };
+}
+
+function getMarketingContent() {
+  return clone(defaultMarketingContent);
+}
+
+function updateMarketingContent(payload = {}) {
+  const content = getMarketingContent();
+
+  if (payload.campaignWindow) {
+    content.campaignWindow = {
+      ...content.campaignWindow,
+      ...pickCampaignFields(payload.campaignWindow)
+    };
+  }
+
+  if (Array.isArray(payload.carouselSlides)) {
+    content.carouselSlides = payload.carouselSlides.map(normalizeCarouselSlide);
+  }
+
+  if (Array.isArray(payload.testimonials)) {
+    content.testimonials = payload.testimonials.map(normalizeTestimonial);
+  }
+
+  return {
+    ...content,
+    updatedAt: new Date().toISOString(),
+    persistence: "mock_only"
   };
 }
 
@@ -502,10 +590,62 @@ module.exports = {
   assembleQuote,
   createRequest,
   getIntakeTemplate,
+  getMarketingContent,
   getOpsConfig,
   getRequest,
   listRequests,
   normalizePayload,
   requestMissingDetails,
-  seedOperationsStore
+  seedOperationsStore,
+  updateMarketingContent
 };
+
+function pickCampaignFields(campaignWindow) {
+  return {
+    id: stringOrFallback(campaignWindow.id, defaultMarketingContent.campaignWindow.id),
+    name: stringOrFallback(campaignWindow.name, defaultMarketingContent.campaignWindow.name),
+    headline: stringOrFallback(campaignWindow.headline, defaultMarketingContent.campaignWindow.headline),
+    startsAt: stringOrFallback(campaignWindow.startsAt, defaultMarketingContent.campaignWindow.startsAt),
+    endsAt: stringOrFallback(campaignWindow.endsAt, defaultMarketingContent.campaignWindow.endsAt),
+    status: stringOrFallback(campaignWindow.status, defaultMarketingContent.campaignWindow.status)
+  };
+}
+
+function normalizeCarouselSlide(slide = {}) {
+  if (!slide.id || !slide.title) {
+    throw createWorkflowError("invalid_marketing_content", "carousel slide id and title are required");
+  }
+
+  return {
+    id: String(slide.id),
+    type: slide.type === "customer_feedback" ? "customer_feedback" : "curated_product",
+    eyebrow: stringOrFallback(slide.eyebrow, "Curated find"),
+    title: String(slide.title),
+    description: stringOrFallback(slide.description, "Mock carousel story for a verified concierge request."),
+    productName: stringOrFallback(slide.productName, "Curated product"),
+    priceLabel: stringOrFallback(slide.priceLabel, "Preliminary quote"),
+    accent: ["cherry", "emerald", "lilac", "orange"].includes(slide.accent) ? slide.accent : "cherry"
+  };
+}
+
+function normalizeTestimonial(testimonial = {}) {
+  if (!testimonial.id || !testimonial.quote) {
+    throw createWorkflowError("invalid_marketing_content", "testimonial id and quote are required");
+  }
+
+  return {
+    id: String(testimonial.id),
+    customerName: stringOrFallback(testimonial.customerName, "Qtcr customer"),
+    quote: String(testimonial.quote),
+    requestId: stringOrFallback(testimonial.requestId, "QTCR-MOCK"),
+    approvedForCarousel: Boolean(testimonial.approvedForCarousel)
+  };
+}
+
+function stringOrFallback(value, fallback) {
+  return typeof value === "string" && value.trim() ? value.trim() : fallback;
+}
+
+function clone(value) {
+  return JSON.parse(JSON.stringify(value));
+}

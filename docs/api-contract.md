@@ -19,6 +19,34 @@ Returns service status.
 
 Returns allowed request modes, delivery presets, and field expectations for the frontend intake.
 
+## `GET /api/concierge/marketing-content`
+
+Returns public mock content for the customer-facing carousel.
+
+```json
+{
+  "content": {
+    "campaignWindow": {
+      "headline": "The U.S. find you want, made simple",
+      "startsAt": "2026-07-27",
+      "endsAt": "2026-08-16",
+      "status": "draft"
+    },
+    "carouselSlides": [
+      {
+        "id": "carry-on",
+        "type": "curated_product",
+        "title": "Cherry carry-on, Costa Rica-ready",
+        "productName": "Expandable carry-on",
+        "priceLabel": "Estimate $451 - $490 landed",
+        "accent": "cherry"
+      }
+    ],
+    "testimonials": []
+  }
+}
+```
+
 ## Operations Auth
 
 All `/api/ops/*` endpoints require this mock header in local development:
@@ -77,7 +105,7 @@ Returns a request from the in-memory store.
 
 ## `GET /api/ops/workspace`
 
-Returns operation configuration plus seeded active requests.
+Returns operation configuration, seeded active requests, and mock marketing content for the manager content area.
 
 ```json
 {
@@ -93,7 +121,42 @@ Returns operation configuration plus seeded active requests.
       { "id": "delivered", "label": "Delivered", "sequence": 8 }
     ]
   },
-  "requests": []
+  "requests": [],
+  "marketingContent": {}
+}
+```
+
+## `GET /api/ops/marketing-content`
+
+Returns the same mock carousel, campaign, and testimonial content through the protected team boundary.
+
+## `PUT /api/ops/marketing-content`
+
+Validates and echoes updated mock manager content. This does not persist to durable storage.
+
+```json
+{
+  "campaignWindow": {
+    "headline": "Weekly verified finds"
+  },
+  "carouselSlides": [
+    {
+      "id": "headphones",
+      "type": "curated_product",
+      "title": "Travel headphones without checkout surprises",
+      "productName": "Noise-canceling headphones",
+      "priceLabel": "Estimate $462 - $514 landed",
+      "accent": "emerald"
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "clear-total",
+      "customerName": "Sofia M.",
+      "quote": "Qtcr showed the product price, import reserve, handling, and delivery before checkout.",
+      "approvedForCarousel": true
+    }
+  ]
 }
 ```
 
