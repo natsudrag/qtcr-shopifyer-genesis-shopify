@@ -34,12 +34,15 @@ Returns public mock content for the customer-facing carousel.
     },
     "carouselSlides": [
       {
-        "id": "carry-on",
+        "id": "fashion-edit",
         "type": "curated_product",
-        "title": "Cherry carry-on, Costa Rica-ready",
-        "productName": "Expandable carry-on",
-        "priceLabel": "Estimate $451 - $490 landed",
-        "accent": "cherry"
+        "title": "Occasion dressing, quoted before purchase",
+        "productName": "Contemporary dress request",
+        "priceLabel": "Preliminary quote model",
+        "category": "Fashion",
+        "imageSrc": "./assets/campaign-fashion-dress.png",
+        "imageAlt": "Editorial portrait of an adult model in an elegant warm ivory dress",
+        "imagePosition": "50% 35%"
       }
     ],
     "testimonials": []
@@ -141,12 +144,15 @@ Validates and echoes updated mock manager content. This does not persist to dura
   },
   "carouselSlides": [
     {
-      "id": "headphones",
+      "id": "fashion-edit",
       "type": "curated_product",
-      "title": "Travel headphones without checkout surprises",
-      "productName": "Noise-canceling headphones",
-      "priceLabel": "Estimate $462 - $514 landed",
-      "accent": "emerald"
+      "title": "Occasion dressing, quoted before purchase",
+      "productName": "Contemporary dress request",
+      "priceLabel": "Preliminary quote model",
+      "category": "Fashion",
+      "imageSrc": "./assets/campaign-fashion-dress.png",
+      "imageAlt": "Editorial portrait of an adult model in an elegant warm ivory dress",
+      "imagePosition": "50% 35%"
     }
   ],
   "testimonials": [

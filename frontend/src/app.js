@@ -11,7 +11,7 @@ const statuses = [
 
 const marketingContent = {
   campaignWindow: {
-    name: "Summer travel drop",
+    name: "The Private Edit",
     headline: "The U.S. find you want, made simple",
     startsAt: "Jul 27",
     endsAt: "Aug 16",
@@ -19,37 +19,60 @@ const marketingContent = {
   },
   carouselSlides: [
     {
-      id: "carry-on",
+      id: "fashion-edit",
       type: "curated_product",
-      eyebrow: "Curated find",
-      title: "Cherry carry-on, Costa Rica-ready",
+      eyebrow: "Fashion sourcing",
+      title: "Occasion dressing, quoted before purchase",
       description:
-        "A verified luggage request with color fallback, freight checks, and a clear landed-cost range.",
-      productName: "Expandable carry-on",
-      priceLabel: "Estimate $451 - $490 landed",
-      accent: "cherry"
+        "A polished apparel request prepared with size, timing, substitution, and landed-cost assumptions clearly separated for review.",
+      productName: "Contemporary dress request",
+      priceLabel: "Preliminary quote model",
+      category: "Fashion",
+      imageSrc: "./assets/campaign-fashion-dress.png",
+      imageAlt: "Editorial portrait of an adult model in an elegant warm ivory dress",
+      imagePosition: "50% 35%"
     },
     {
-      id: "headphones",
+      id: "beauty-edit",
       type: "curated_product",
-      eyebrow: "Verified quote",
-      title: "Travel headphones without checkout surprises",
+      eyebrow: "Beauty sourcing",
+      title: "Beauty requests with shade checks first",
       description:
-        "Sourced from a U.S. retailer, checked for warranty risk, battery shipping rules, and local delivery.",
-      productName: "Noise-canceling headphones",
-      priceLabel: "Estimate $462 - $514 landed",
-      accent: "emerald"
+        "Makeup and skincare requests stay structured around shade preferences, retailer verification, substitution rules, and return sensitivity.",
+      productName: "Beauty and makeup brief",
+      priceLabel: "Human verification required",
+      category: "Beauty",
+      imageSrc: "./assets/campaign-beauty-makeup.png",
+      imageAlt: "Luxury beauty editorial portrait with refined makeup and warm champagne styling",
+      imagePosition: "48% 42%"
     },
     {
-      id: "feedback",
+      id: "fragrance-edit",
+      type: "curated_product",
+      eyebrow: "Fragrance sourcing",
+      title: "Fragrance, handled with extra care",
+      description:
+        "Perfume and delicate beauty goods are flagged for carrier rules, packaging risk, and quote review before any checkout handoff.",
+      productName: "Fragrance request",
+      priceLabel: "Carrier rules reviewed",
+      category: "Fragrance",
+      imageSrc: "./assets/campaign-fragrance.png",
+      imageAlt: "Unbranded luxury perfume bottle on ivory stone with champagne satin and adult model silhouette",
+      imagePosition: "48% 58%"
+    },
+    {
+      id: "feedback-edit",
       type: "customer_feedback",
-      eyebrow: "Customer feedback",
-      title: "They made the total clear before I said yes.",
+      eyebrow: "Client feedback",
+      title: "The quote felt transparent before I approved it.",
       description:
-        "Mock testimonial highlighting quote transparency, human verification, and delivery progress updates.",
-      productName: "Beauty bundle",
-      priceLabel: "Delivered to Escazu",
-      accent: "lilac"
+        "Mock testimonial for the Stream Buy Gen service experience: refined sourcing, human verification, and progress updates without live inventory claims.",
+      productName: "Accessories request",
+      priceLabel: "Delivered to Costa Rica",
+      category: "Accessories",
+      imageSrc: "./assets/campaign-accessories.png",
+      imageAlt: "Luxury accessories editorial portrait with adult model, handbag, sunglasses, and jewelry",
+      imagePosition: "50% 36%"
     }
   ],
   testimonials: [
@@ -75,27 +98,27 @@ const requests = [
     channel: "URL",
     status: "new",
     dueBy: "Today 4:00 PM",
-    title: "Cherry red Away carry-on",
-    source: "awaytravel.com",
+    title: "Ivory occasion dress",
+    source: "U.S. fashion retailer link",
     delivery: "San Jose pickup",
     brief: {
-      product: "Away Bigger Carry-On Flex",
-      variant: "Cherry red, carry-on size, expandable hard shell",
+      product: "Contemporary occasion dress candidate",
+      variant: "Ivory, midi-to-floor length, refined evening silhouette",
       retailerPrice: "$295.00",
       extractedFrom: "Customer URL",
-      questions: ["Confirm if comparable red is acceptable if limited edition color is gone.", "Choose speed versus lowest landed cost."],
-      risks: ["Dimensional weight can affect freight.", "Retailer return window may close before Costa Rica delivery."]
+      questions: ["Confirm exact size and acceptable hem length.", "Choose speed versus lowest landed cost."],
+      risks: ["Fit-sensitive apparel may be difficult to return after import.", "Promotions and availability require human verification."]
     },
     quote: [
       ["Retailer item", 295],
       ["U.S. tax estimate", 22],
       ["U.S. domestic shipping", 0],
       ["Import duty reserve", 54],
-      ["Freight and handling", 68],
+      ["Freight and handling", 38],
       ["Local delivery", 12],
       ["Concierge service", 39]
     ],
-    timeline: ["Request received from product URL", "AI brief prepared with low confidence on color availability"]
+    timeline: ["Request received from product URL", "Shopping brief prepared with fit and availability checks"]
   },
   {
     id: "SBG-20260726-0003",
@@ -103,27 +126,27 @@ const requests = [
     channel: "Screenshot",
     status: "needs_details",
     dueBy: "Tomorrow",
-    title: "Ivory platform sandals",
-    source: "Screenshot from Nordstrom",
+    title: "Blush beauty set",
+    source: "Customer screenshot from U.S. retailer",
     delivery: "GAM courier",
     brief: {
-      product: "Designer platform sandal candidate",
-      variant: "Ivory, size not visible, block heel",
+      product: "Beauty and makeup set candidate",
+      variant: "Soft blush palette, brush, compact, shade family unconfirmed",
       retailerPrice: "$128.00",
       extractedFrom: "Customer screenshot",
-      questions: ["Ask for shoe size and acceptable heel height.", "Confirm whether a similar brand is acceptable."],
-      risks: ["Footwear fit returns are difficult after import.", "Screenshot price needs live source verification."]
+      questions: ["Ask for shade preferences and sensitive ingredients.", "Confirm whether a comparable formulation is acceptable."],
+      risks: ["Shade matching requires customer confirmation.", "Beauty returns may be limited once opened or imported."]
     },
     quote: [
       ["Retailer item", 128],
       ["U.S. tax estimate", 10],
       ["U.S. domestic shipping", 8],
       ["Import duty reserve", 24],
-      ["Freight and handling", 31],
+      ["Freight and handling", 24],
       ["Local delivery", 10],
       ["Concierge service", 25]
     ],
-    timeline: ["Screenshot request received", "Missing size and substitute preference requested"]
+    timeline: ["Screenshot request received", "Missing shade and substitution preference requested"]
   },
   {
     id: "SBG-20260726-0002",
@@ -131,25 +154,25 @@ const requests = [
     channel: "Request",
     status: "quoted",
     dueBy: "Quote expires Friday",
-    title: "Noise-canceling headphones",
-    source: "Concierge sourced",
+    title: "Signature fragrance",
+    source: "Concierge sourced candidate",
     delivery: "Escazu courier",
     brief: {
-      product: "Sony WH-1000XM5",
-      variant: "Black, new, U.S. warranty",
-      retailerPrice: "$328.00",
+      product: "Unbranded fragrance candidate from U.S. retailer",
+      variant: "Warm floral profile, 50ml to 75ml, sealed packaging",
+      retailerPrice: "$168.00",
       extractedFrom: "Natural-language request",
-      questions: ["Confirm black over silver.", "Confirm U.S. warranty tradeoff."],
-      risks: ["Electronics warranty support may require U.S. return routing.", "Battery shipping rules can affect carrier choice."]
+      questions: ["Confirm preferred scent family.", "Confirm whether travel size is acceptable if full size is restricted."],
+      risks: ["Fragrance shipping rules can affect carrier choice.", "Fragile packaging requires inspection on U.S. receipt."]
     },
     quote: [
-      ["Retailer item", 328],
-      ["U.S. tax estimate", 25],
+      ["Retailer item", 168],
+      ["U.S. tax estimate", 13],
       ["U.S. domestic shipping", 0],
-      ["Import duty reserve", 48],
-      ["Freight and handling", 42],
+      ["Import duty reserve", 32],
+      ["Freight and handling", 36],
       ["Local delivery", 9],
-      ["Concierge service", 36]
+      ["Concierge service", 34]
     ],
     timeline: ["Natural-language request normalized", "Quote assembled and waiting for customer approval"]
   },
@@ -159,25 +182,25 @@ const requests = [
     channel: "URL",
     status: "in_transit",
     dueBy: "ETA Aug 2",
-    title: "Camera lens filter kit",
-    source: "bhphotovideo.com",
+    title: "Leather accessory set",
+    source: "U.S. accessories retailer link",
     delivery: "San Jose pickup",
     brief: {
-      product: "Tiffen 67mm filter kit",
-      variant: "UV, CPL, ND set",
-      retailerPrice: "$84.95",
+      product: "Leather accessory set candidate",
+      variant: "Warm taupe, structured case and small travel accessories",
+      retailerPrice: "$184.95",
       extractedFrom: "Customer URL",
       questions: ["No open shopper questions."],
-      risks: ["Fragile accessory packaging requires inspection on receipt."]
+      risks: ["Finish and color should be inspected on U.S. receipt."]
     },
     quote: [
-      ["Retailer item", 85],
-      ["U.S. tax estimate", 7],
+      ["Retailer item", 185],
+      ["U.S. tax estimate", 15],
       ["U.S. domestic shipping", 0],
-      ["Import duty reserve", 15],
-      ["Freight and handling", 21],
+      ["Import duty reserve", 35],
+      ["Freight and handling", 28],
       ["Local delivery", 0],
-      ["Concierge service", 18]
+      ["Concierge service", 28]
     ],
     timeline: ["Purchased in U.S.", "Received at Miami consolidation point", "Dispatched to Costa Rica"]
   }
@@ -227,7 +250,7 @@ function renderCarousel() {
       tab.setAttribute("role", "tab");
       tab.setAttribute("aria-selected", String(index === activeSlideIndex));
       tab.setAttribute("aria-controls", "carousel-stage");
-      tab.textContent = slide.eyebrow;
+      tab.textContent = slide.category;
       tab.addEventListener("click", () => setActiveSlide(index));
       return tab;
     })
@@ -238,12 +261,6 @@ function renderCarousel() {
   renderMarketingSurface();
 }
 
-function renderMarketingSurface() {
-  document.querySelector("#hero-title").textContent = marketingContent.campaignWindow.headline;
-  document.querySelector("#campaign-window-badge").textContent =
-    `${marketingContent.campaignWindow.name}: ${marketingContent.campaignWindow.startsAt} to ${marketingContent.campaignWindow.endsAt}`;
-}
-
 function setActiveSlide(index) {
   activeSlideIndex = (index + marketingContent.carouselSlides.length) % marketingContent.carouselSlides.length;
   renderCarousel();
@@ -251,23 +268,36 @@ function setActiveSlide(index) {
 
 function createSlide(slide) {
   const article = document.createElement("article");
-  article.className = `carousel-slide accent-${slide.accent}`;
+  article.className = "carousel-slide";
   article.setAttribute("role", "tabpanel");
   article.setAttribute("aria-labelledby", `carousel-tab-${slide.id}`);
   article.innerHTML = `
-    <div class="product-poster ${slide.id}" role="img" aria-label="${slide.productName} editorial product visual">
-      <span class="poster-price">${slide.priceLabel}</span>
-      <span class="poster-object"></span>
-      <span class="poster-shadow"></span>
-    </div>
+    <figure class="campaign-image">
+      <img src="${slide.imageSrc}" alt="${slide.imageAlt}" style="object-position: ${slide.imagePosition}" />
+    </figure>
     <div class="slide-copy">
-      <p class="eyebrow">${slide.type === "customer_feedback" ? "Verified feedback" : "Curated product find"}</p>
+      <p class="eyebrow">${slide.eyebrow}</p>
       <h3>${slide.title}</h3>
       <p>${slide.description}</p>
-      <span>${slide.productName}</span>
+      <dl>
+        <div>
+          <dt>Category</dt>
+          <dd>${slide.productName}</dd>
+        </div>
+        <div>
+          <dt>Quote state</dt>
+          <dd>${slide.priceLabel}</dd>
+        </div>
+      </dl>
     </div>
   `;
   return article;
+}
+
+function renderMarketingSurface() {
+  document.querySelector("#hero-title").textContent = marketingContent.campaignWindow.headline;
+  document.querySelector("#campaign-window-badge").textContent =
+    `${marketingContent.campaignWindow.name}: ${marketingContent.campaignWindow.startsAt} to ${marketingContent.campaignWindow.endsAt}`;
 }
 
 function renderSampleProgress() {
@@ -369,7 +399,7 @@ function renderManagerContent() {
   document.querySelector("#campaign-window").value =
     `${marketingContent.campaignWindow.startsAt} to ${marketingContent.campaignWindow.endsAt}`;
   document.querySelector("#featured-slide").replaceChildren(
-    ...marketingContent.carouselSlides.map((slide) => new Option(slide.title, slide.id))
+    ...marketingContent.carouselSlides.map((slide) => new Option(`${slide.category}: ${slide.title}`, slide.id))
   );
   document.querySelector("#featured-slide").value = marketingContent.carouselSlides[activeSlideIndex].id;
   document.querySelector("#approved-feedback").replaceChildren(
@@ -381,7 +411,7 @@ function renderManagerContent() {
     ...marketingContent.carouselSlides.map((slide) => {
       const item = document.createElement("article");
       item.className = "content-chip";
-      item.innerHTML = `<strong>${slide.title}</strong><span>${slide.type.replace("_", " ")}</span>`;
+      item.innerHTML = `<strong>${slide.category}</strong><span>${slide.title}</span>`;
       return item;
     })
   );

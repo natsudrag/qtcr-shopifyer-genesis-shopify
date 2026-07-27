@@ -37,11 +37,11 @@ The current validation builds the static frontend into `frontend/dist/` and runs
 Included:
 
 - Premium responsive intake UI for URL, screenshot, and natural-language shopping requests.
-- Retro-editorial customer hero carousel with local product-style visuals and verified feedback slides.
+- Luxury fashion and beauty editorial customer hero carousel with original local campaign images and verified feedback slides.
 - Emerald order-progress indicators with restrained accessible transitions and reduced-motion support.
 - Mock protected shopper-operations workspace for team users.
 - Mock manager content area for campaign windows, carousel product curation, and approved customer feedback.
-- AI-style structured brief prototype with product extraction, clarifying questions, preliminary landed-cost range, risk/return guidance, and human verification.
+- Structured brief prototype with product extraction, clarifying questions, preliminary landed-cost range, risk/return guidance, and human verification.
 - Backend API skeleton with mocked request creation, queue retrieval, marketing content contracts, missing-detail requests, transparent quote assembly, and status advancement.
 - Documentation for architecture, API contracts, and next integration steps.
 
@@ -57,7 +57,7 @@ Excluded by design:
 - Product scraping or marketplace automation.
 - Durable database persistence.
 - Production authentication.
-- Remote image hosting or external carousel hotlinks.
+- Remote image hosting, external carousel hotlinks, or live-store inventory claims.
 
 ## Mock Team Access
 

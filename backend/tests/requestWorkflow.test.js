@@ -55,7 +55,8 @@ test("updateMarketingContent validates manager carousel content", () => {
       {
         id: "sample-slide",
         title: "Verified jacket request",
-        accent: "emerald"
+        category: "Fashion",
+        imageSrc: "./assets/campaign-fashion-dress.png"
       }
     ],
     testimonials: [
@@ -68,7 +69,8 @@ test("updateMarketingContent validates manager carousel content", () => {
   });
 
   assert.equal(content.campaignWindow.headline, "Weekly verified finds");
-  assert.equal(content.carouselSlides[0].accent, "emerald");
+  assert.equal(content.carouselSlides[0].category, "Fashion");
+  assert.equal(content.carouselSlides[0].imageSrc, "./assets/campaign-fashion-dress.png");
   assert.equal(content.testimonials[0].customerName, "Stream Buy Gen customer");
   assert.equal(content.persistence, "mock_only");
 });

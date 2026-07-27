@@ -51,8 +51,8 @@ const defaultQuoteLines = [
 
 const defaultMarketingContent = {
   campaignWindow: {
-    id: "summer-travel-drop",
-    name: "Summer travel drop",
+    id: "private-edit",
+    name: "The Private Edit",
     headline: "The U.S. find you want, made simple",
     startsAt: "2026-07-27",
     endsAt: "2026-08-16",
@@ -60,34 +60,56 @@ const defaultMarketingContent = {
   },
   carouselSlides: [
     {
-      id: "carry-on",
+      id: "fashion-edit",
       type: "curated_product",
-      eyebrow: "Curated find",
-      title: "Cherry carry-on, Costa Rica-ready",
-      description: "A verified luggage request with color fallback, freight checks, and a clear landed-cost range.",
-      productName: "Expandable carry-on",
-      priceLabel: "Estimate $451 - $490 landed",
-      accent: "cherry"
+      eyebrow: "Fashion sourcing",
+      title: "Occasion dressing, quoted before purchase",
+      description: "A polished apparel request prepared with size, timing, substitution, and landed-cost assumptions clearly separated for review.",
+      productName: "Contemporary dress request",
+      priceLabel: "Preliminary quote model",
+      category: "Fashion",
+      imageSrc: "./assets/campaign-fashion-dress.png",
+      imageAlt: "Editorial portrait of an adult model in an elegant warm ivory dress",
+      imagePosition: "50% 35%"
     },
     {
-      id: "headphones",
+      id: "beauty-edit",
       type: "curated_product",
-      eyebrow: "Verified quote",
-      title: "Travel headphones without checkout surprises",
-      description: "Sourced from a U.S. retailer, checked for warranty risk, battery shipping rules, and local delivery.",
-      productName: "Noise-canceling headphones",
-      priceLabel: "Estimate $462 - $514 landed",
-      accent: "emerald"
+      eyebrow: "Beauty sourcing",
+      title: "Beauty requests with shade checks first",
+      description: "Makeup and skincare requests stay structured around shade preferences, retailer verification, substitution rules, and return sensitivity.",
+      productName: "Beauty and makeup brief",
+      priceLabel: "Human verification required",
+      category: "Beauty",
+      imageSrc: "./assets/campaign-beauty-makeup.png",
+      imageAlt: "Luxury beauty editorial portrait with refined makeup and warm champagne styling",
+      imagePosition: "48% 42%"
     },
     {
-      id: "feedback",
+      id: "fragrance-edit",
+      type: "curated_product",
+      eyebrow: "Fragrance sourcing",
+      title: "Fragrance, handled with extra care",
+      description: "Perfume and delicate beauty goods are flagged for carrier rules, packaging risk, and quote review before any checkout handoff.",
+      productName: "Fragrance request",
+      priceLabel: "Carrier rules reviewed",
+      category: "Fragrance",
+      imageSrc: "./assets/campaign-fragrance.png",
+      imageAlt: "Unbranded luxury perfume bottle on ivory stone with champagne satin and adult model silhouette",
+      imagePosition: "48% 58%"
+    },
+    {
+      id: "feedback-edit",
       type: "customer_feedback",
-      eyebrow: "Customer note",
-      title: "They made the total clear before I said yes.",
-      description: "Mock testimonial highlighting quote transparency, human verification, and delivery progress updates.",
-      productName: "Beauty bundle",
+      eyebrow: "Client feedback",
+      title: "The quote felt transparent before I approved it.",
+      description: "Mock testimonial for the Stream Buy Gen service experience: refined sourcing, human verification, and progress updates without live inventory claims.",
+      productName: "Accessories request",
       priceLabel: "Delivered to Escazu",
-      accent: "lilac"
+      category: "Accessories",
+      imageSrc: "./assets/campaign-accessories.png",
+      imageAlt: "Luxury accessories editorial portrait with adult model, handbag, sunglasses, and jewelry",
+      imagePosition: "50% 36%"
     }
   ],
   testimonials: [
@@ -176,27 +198,27 @@ function seedOperationsStore(store) {
       status: "new",
       customer: { name: "Mariana R.", email: "mariana@example.com" },
       requestType: "url",
-      input: "https://www.awaytravel.com/suitcases/bigger-carry-on-flex",
+      input: "https://example.com/us-fashion-retailer/ivory-occasion-dress",
       deliveryPreference: "san-jose-pickup",
-      title: "Cherry red Away carry-on",
-      source: "awaytravel.com",
+      title: "Ivory occasion dress",
+      source: "U.S. fashion retailer link",
       priority: "high",
       dueBy: "Today 4:00 PM",
       brief: {
         product: {
-          title: "Away Bigger Carry-On Flex",
+          title: "Contemporary occasion dress candidate",
           source: "Customer-provided URL",
-          variant: "Cherry red, carry-on size, expandable hard shell",
+          variant: "Ivory, midi-to-floor length, refined evening silhouette",
           quantity: 1,
           retailerPrice: 295
         },
         questions: [
-          "Confirm if comparable red is acceptable if limited edition color is gone.",
+          "Confirm exact size and acceptable hem length.",
           "Choose speed versus lowest landed cost."
         ],
         riskGuidance: [
-          "Dimensional weight can affect freight.",
-          "Retailer return window may close before Costa Rica delivery."
+          "Fit-sensitive apparel may be difficult to return after import.",
+          "Promotions and availability require human verification."
         ]
       },
       quoteLines: [
@@ -204,78 +226,78 @@ function seedOperationsStore(store) {
         quoteLine("us_tax", "U.S. tax estimate", 22),
         quoteLine("domestic_shipping", "U.S. domestic shipping", 0),
         quoteLine("import_reserve", "Import duty reserve", 54),
-        quoteLine("freight_handling", "Freight and handling", 68),
+        quoteLine("freight_handling", "Freight and handling", 38),
         quoteLine("local_delivery", "Local delivery", 12),
         quoteLine("concierge_service", "Concierge service", 39)
       ],
-      timeline: ["Request received from product URL", "AI brief prepared with low confidence on color availability"]
+      timeline: ["Request received from product URL", "Shopping brief prepared with fit and availability checks"]
     }),
     createSeedRequest({
       id: "SBG-20260726-0003",
       status: "needs_details",
       customer: { name: "Diego P.", email: "diego@example.com" },
       requestType: "screenshot",
-      input: "Screenshot notes: ivory platform sandals from Nordstrom",
+      input: "Screenshot notes: soft blush beauty set from a U.S. retailer",
       deliveryPreference: "gam-courier",
-      title: "Ivory platform sandals",
-      source: "Screenshot from Nordstrom",
+      title: "Blush beauty set",
+      source: "Customer screenshot from U.S. retailer",
       priority: "medium",
       dueBy: "Tomorrow",
       brief: {
         product: {
-          title: "Designer platform sandal candidate",
+          title: "Beauty and makeup set candidate",
           source: "Customer-provided screenshot",
-          variant: "Ivory, size not visible, block heel",
+          variant: "Soft blush palette, brush, compact, shade family unconfirmed",
           quantity: 1,
           retailerPrice: 128
         },
-        questions: ["Ask for shoe size and acceptable heel height.", "Confirm whether a similar brand is acceptable."],
-        riskGuidance: ["Footwear fit returns are difficult after import.", "Screenshot price needs live source verification."]
+        questions: ["Ask for shade preferences and sensitive ingredients.", "Confirm whether a comparable formulation is acceptable."],
+        riskGuidance: ["Shade matching requires customer confirmation.", "Beauty returns may be limited once opened or imported."]
       },
       quoteLines: [
         quoteLine("retailer_item", "Retailer item", 128),
         quoteLine("us_tax", "U.S. tax estimate", 10),
         quoteLine("domestic_shipping", "U.S. domestic shipping", 8),
         quoteLine("import_reserve", "Import duty reserve", 24),
-        quoteLine("freight_handling", "Freight and handling", 31),
+        quoteLine("freight_handling", "Freight and handling", 24),
         quoteLine("local_delivery", "Local delivery", 10),
         quoteLine("concierge_service", "Concierge service", 25)
       ],
-      timeline: ["Screenshot request received", "Missing size and substitute preference requested"]
+      timeline: ["Screenshot request received", "Missing shade and substitution preference requested"]
     }),
     createSeedRequest({
       id: "SBG-20260726-0002",
       status: "quoted",
       customer: { name: "Sofia M.", email: "sofia@example.com" },
       requestType: "natural_language",
-      input: "Need premium noise-canceling headphones for travel under $350 landed.",
+      input: "Need a warm floral fragrance sourced from a U.S. retailer with careful shipping review.",
       deliveryPreference: "gam-courier",
-      title: "Noise-canceling headphones",
-      source: "Concierge sourced",
+      title: "Signature fragrance",
+      source: "Concierge sourced candidate",
       priority: "high",
       dueBy: "Quote expires Friday",
       brief: {
         product: {
-          title: "Sony WH-1000XM5",
-          source: "Concierge sourced",
-          variant: "Black, new, U.S. warranty",
+          title: "Unbranded fragrance candidate from U.S. retailer",
+          source: "Concierge sourced candidate",
+          variant: "Warm floral profile, 50ml to 75ml, sealed packaging",
           quantity: 1,
-          retailerPrice: 328
+          retailerPrice: 168
         },
-        questions: ["Confirm black over silver.", "Confirm U.S. warranty tradeoff."],
+        questions: ["Confirm preferred scent family.", "Confirm whether travel size is acceptable if full size is restricted."],
         riskGuidance: [
-          "Electronics warranty service may require U.S. return routing.",
-          "Battery shipping rules can affect carrier choice."
+          "Fragrance shipping rules can affect carrier choice.",
+          "Fragile packaging requires inspection on U.S. receipt."
         ]
       },
       quoteLines: [
-        quoteLine("retailer_item", "Retailer item", 328),
-        quoteLine("us_tax", "U.S. tax estimate", 25),
+        quoteLine("retailer_item", "Retailer item", 168),
+        quoteLine("us_tax", "U.S. tax estimate", 13),
         quoteLine("domestic_shipping", "U.S. domestic shipping", 0),
-        quoteLine("import_reserve", "Import duty reserve", 48),
-        quoteLine("freight_handling", "Freight and handling", 42),
+        quoteLine("import_reserve", "Import duty reserve", 32),
+        quoteLine("freight_handling", "Freight and handling", 36),
         quoteLine("local_delivery", "Local delivery", 9),
-        quoteLine("concierge_service", "Concierge service", 36)
+        quoteLine("concierge_service", "Concierge service", 34)
       ],
       timeline: ["Natural-language request normalized", "Quote assembled and waiting for customer approval"]
     })
@@ -624,7 +646,10 @@ function normalizeCarouselSlide(slide = {}) {
     description: stringOrFallback(slide.description, "Mock carousel story for a verified concierge request."),
     productName: stringOrFallback(slide.productName, "Curated product"),
     priceLabel: stringOrFallback(slide.priceLabel, "Preliminary quote"),
-    accent: ["cherry", "emerald", "lilac", "orange"].includes(slide.accent) ? slide.accent : "cherry"
+    category: stringOrFallback(slide.category, "Fashion"),
+    imageSrc: stringOrFallback(slide.imageSrc, "./assets/campaign-fashion-dress.png"),
+    imageAlt: stringOrFallback(slide.imageAlt, "Luxury editorial campaign image"),
+    imagePosition: stringOrFallback(slide.imagePosition, "50% 50%")
   };
 }
 
