@@ -1,0 +1,16 @@
+{
+  "name": "qtcr-shopifyer-genesis-shopify",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Initial product foundation for a premium U.S.-to-Costa-Rica personal-shopping concierge.",
+  "scripts": {
+    "dev:frontend": "node frontend/src/dev-server.js",
+    "dev:backend": "node backend/src/server.js",
+    "build:frontend": "node frontend/src/build.js",
+    "test": "node --test backend/tests/*.test.js",
+    "check": "npm run build:frontend && npm test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
